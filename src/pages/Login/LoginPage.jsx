@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function LoginUser() {
+function LoginPage() {
   return (
     <div className="flex h-screen bg-white">
       <div className="close-button absolute right-0 p-5 lg:p-5">
@@ -44,10 +44,10 @@ function LoginUser() {
           <div className="space-y-4">
             <form className="flex flex-col gap-y-1">
               <div className="flex flex-col gap-y-1">
-                <div class="relative">
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                     <svg
-                      class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                      className="w-4 h-4 text-gray-500 dark:text-gray-400"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -60,16 +60,16 @@ function LoginUser() {
                   <input
                     type="text"
                     id="email-address-icon"
-                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-[#006769] focus:border-[#006769] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#006769] dark:focus:border-[#006769]"
+                    className="bg-white border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-[#006769] focus:border-[#006769] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#006769] dark:focus:border-[#006769]"
                     placeholder="Email"
                   />
                 </div>
               </div>
               <div className="flex flex-col gap-y-1">
-                <div class="relative">
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                     <svg
-                      class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                      className="w-5 h-5 text-gray-500 dark:text-gray-400"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -78,16 +78,16 @@ function LoginUser() {
                       viewBox="0 0 24 24"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M8 10V7a4 4 0 1 1 8 0v3h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2-3a2 2 0 1 1 4 0v3h-4V7Zm2 6a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                   </div>
                   <input
                     type="password"
                     id="password"
-                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-[#006769] focus:border-[#006769] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#006769] dark:focus:border-[#006769]"
+                    className="bg-white border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-[#006769] focus:border-[#006769] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#006769] dark:focus:border-[#006769]"
                     placeholder="Password"
                   />
                 </div>
@@ -99,12 +99,12 @@ function LoginUser() {
                 >
                   SIGN IN
                 </button>
-              </div> 
+              </div>
             </form>
           </div>
           <div className="mt-2 text-sm text-gray-600 text-center">
             <p>
-            Don’t have an account ?{' '}
+              Don&apos;t have an account ?{' '}
               <Link
                 to="/register"
                 className="text-[#006769] hover:text-white font-semibold hover:bg-[#40A578] hover:p-1 hover:rounded-md"
@@ -120,4 +120,4 @@ function LoginUser() {
   );
 }
 
-export default LoginUser;
+export default LoginPage;
