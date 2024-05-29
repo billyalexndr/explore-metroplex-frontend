@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
+import useLogOut from '../../hooks/useLogOut';
 
 function HomePage() {
   const [tours, setTours] = useState();
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
+  const logout = useLogOut();
+
+  const signOut = async () => {
+    await logout();
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -39,7 +45,7 @@ function HomePage() {
   return (
     <div>
       <div>HomePage</div>
-      <button type="button" className="button-logout">Log Out</button>
+      <button onClick={signOut} type="button" className="button-logout">Log Out</button>
       <Link to="/user">Go to User Page</Link>
       {tours?.length
         ? (

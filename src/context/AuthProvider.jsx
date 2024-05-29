@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
-    const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState({});
 
-    const value = useMemo(() => ({ auth, setAuth }), [auth, setAuth]);
+  const value = useMemo(() => ({ auth, setAuth }), [auth, setAuth]);
 
-    return (
-      <AuthContext.Provider value={value}>
-        {children}
-      </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 AuthProvider.propTypes = {
