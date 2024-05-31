@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import api from '../../../utils/api';
 import TextInput from '../../../components/Auth/TextInput';
 import useInput from '../../../hooks/useInput';
-import axios from '../../../api/axios';
 
 function FormSection() {
   const [name, onNameChange] = useInput('');
@@ -17,36 +17,16 @@ function FormSection() {
     setErrMsg('');
 
     try {
-      const response = await axios.post(
-        '/register',
-        JSON.stringify({
-          name,
-          username,
-          email,
-          password,
-        }),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-        },
-      );
-
-      const responseJson = await response.data;
-      const { status, message } = responseJson;
-
-      if (status !== 'success') {
-        throw new Error(message);
-      }
+      await api.register({
+        name,
+        username,
+        email,
+        password,
+      });
 
       navigate('/login');
     } catch (error) {
-      if (error.response) {
-        setErrMsg(error.response.data.message || 'Registration failed');
-      } else {
-        setErrMsg('Registration failed');
-      }
+      setErrMsg(error.response.data.message || 'registration failed');
     }
   };
 

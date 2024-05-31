@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import api from '../../../utils/api';
 import TextInput from '../../../components/Auth/TextInput';
 import useInput from '../../../hooks/useInput';
-import axios from '../../../api/axios';
 import useAuth from '../../../hooks/useAuth';
 
 function FormSection() {
@@ -20,40 +20,13 @@ function FormSection() {
     setErrMsg('');
 
     try {
-      const response = await axios.post(
-        '/login',
-        JSON.stringify({
-          email,
-          password,
-        }),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-        },
-      );
-
-      const responseJson = await response.data;
-      const { status, message } = responseJson;
-
-      if (status !== 'success') {
-        throw new Error(message);
-      }
-
-      const { data: { token } } = responseJson;
-      const accessToken = token;
+      const token = await api.login({ email, password });
       const { id, name, username, role } = jwtDecode(token);
-
-      setAuth({ user: { id, name, username, email }, role, accessToken });
+      setAuth({ user: { id, name, username, email }, role, accessToken: token });
 
       navigate(from, { replace: true });
     } catch (error) {
-      if (error.response) {
-        setErrMsg(error.response.data.message || 'Login failed');
-      } else {
-        setErrMsg('Login failed');
-      }
+      setErrMsg(error.response.data.message || 'login failed');
     }
   };
 

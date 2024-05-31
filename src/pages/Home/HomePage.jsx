@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import axios from '../../api/axios';
+import api from '../../utils/api';
 import useLogOut from '../../hooks/useLogOut';
 
 function HomePage() {
@@ -20,11 +20,9 @@ function HomePage() {
 
     const getTours = async () => {
       try {
-        const { data: { data } } = await axios.get('/tours', {
-          signal: controller.signal,
-        });
+        const tours = await api.getAllTour(controller.signal);
         if (isMounted) {
-          setTours(data.tours);
+          setTours(tours);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });

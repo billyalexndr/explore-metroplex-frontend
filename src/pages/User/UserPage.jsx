@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import api from '../../utils/api';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 function UserPage() {
@@ -15,11 +16,9 @@ function UserPage() {
 
     const getUsers = async () => {
       try {
-        const response = await axiosPrivate.get('/users', {
-          signal: controller.signal,
-        });
+        const users = await api.getAllUser({ axiosPrivate, signal: controller.signal });
         if (isMounted) {
-          setUsers(response.data.data.users);
+          setUsers(users);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
