@@ -158,7 +158,7 @@ const api = (() => {
       },
     );
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
@@ -185,7 +185,7 @@ const api = (() => {
       },
     );
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
@@ -219,7 +219,7 @@ const api = (() => {
       signal,
     });
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
@@ -238,23 +238,28 @@ const api = (() => {
     name,
     city,
     price,
+    capacity,
     description,
     address,
     map,
+    image,
   }) {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('city', city);
+    formData.append('price', price);
+    formData.append('capacity', capacity);
+    formData.append('description', description);
+    formData.append('address', address);
+    formData.append('map', map);
+    formData.append('image', image);
+
     const response = await axiosPrivate.post(
       '/tours',
-      JSON.stringify({
-        name,
-        city,
-        price,
-        description,
-        address,
-        map,
-      }),
+      formData,
       {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       },
@@ -263,7 +268,7 @@ const api = (() => {
       },
     );
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
@@ -283,23 +288,28 @@ const api = (() => {
     name,
     city,
     price,
+    capacity,
     description,
     address,
     map,
+    image,
   }) {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('city', city);
+    formData.append('price', price);
+    formData.append('capacity', capacity);
+    formData.append('description', description);
+    formData.append('address', address);
+    formData.append('map', map);
+    formData.append('image', image);
+
     const response = await axiosPrivate.patch(
       `/tours/${id}`,
-      JSON.stringify({
-        name,
-        city,
-        price,
-        description,
-        address,
-        map,
-      }),
+      formData,
       {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       },
@@ -308,7 +318,7 @@ const api = (() => {
       },
     );
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
@@ -335,7 +345,7 @@ const api = (() => {
       },
     );
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
@@ -378,7 +388,7 @@ const api = (() => {
       },
     );
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
@@ -394,7 +404,7 @@ const api = (() => {
       signal,
     });
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
@@ -421,7 +431,7 @@ const api = (() => {
       },
     );
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
@@ -450,7 +460,7 @@ const api = (() => {
       },
     );
 
-    const responseJson = await response.json();
+    const responseJson = await response.data;
 
     const { status, message } = responseJson;
 
