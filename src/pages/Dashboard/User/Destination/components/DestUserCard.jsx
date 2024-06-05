@@ -1,5 +1,11 @@
 import React from 'react';
-import { FaRegHeart, FaHeart, FaEdit, FaRegTrashAlt } from 'react-icons/fa';
+import {
+  FaRegHeart,
+  FaHeart,
+  FaStar,
+  FaEdit,
+  FaRegTrashAlt,
+} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const DestUserCard = () => {
@@ -20,9 +26,9 @@ const DestUserCard = () => {
         </p>
         <div className="flex justify-between">
           <div>
-            <button className="flex items-center justify-center gap-2">
-              <FaRegHeart size={20} />
-              <p className="text-base">5k Likes</p>
+            <button className="flex items-center justify-center gap-2 text-yellow-400">
+              <FaStar size={20} />
+              <p className="mt-1 text-base text-black">4.8</p>
             </button>
           </div>
         </div>
