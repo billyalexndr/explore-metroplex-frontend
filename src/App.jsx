@@ -20,14 +20,14 @@ function App() {
 
         <Route element={<PersistLogin />}>
           <Route element={<RequiredAuth allowedRoles={['USER']} />}>
-            <Route path="/" element={<UserPage />} />
+            <Route path="/user" element={<UserPage />} />
             <Route path="/destination" element={<DestinationPage />} />
             <Route path="/detail-destination" element={<DetailPage />} />
             <Route path="/buy-ticket" element={<BuyTicketPage />} />
           </Route>
 
           <Route element={<RequiredAuth allowedRoles={['ADMIN']} />}>
-            <Route path="/" element={<AdminPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Route>
         </Route>
 
