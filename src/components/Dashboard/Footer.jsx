@@ -127,7 +127,7 @@ function footer() {
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <span className="block text-sm text-white sm:text-center dark:text-white">
-          © 2024
+          © 2024{' '}
           <Link to="https://flowbite.com/" className="hover:underline">
             C624-PS005™
           </Link>
