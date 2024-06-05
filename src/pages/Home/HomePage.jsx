@@ -45,10 +45,24 @@ function HomePage() {
       <div>HomePage</div>
       <button onClick={signOut} type="button" className="button-logout">Log Out</button>
       <Link to="/user">Go to User Page</Link>
+      <Link to="/profile">Profile</Link>
+      <Link to="/add">Add Tour</Link>
       {tours?.length
         ? (
           <ul>
-            {tours.map((tour) => <li key={tour.id}>{tour?.name}</li>)}
+            {tours.map((tour) => (
+              <li key={tour.id}>
+                <div>
+                  <img src={tour.photo} alt={tour.name} />
+                </div>
+                <div>
+                  <h3>{tour.name}</h3>
+                  <p>Description: {tour.description}</p>
+                  <p>Price: {tour.price}</p>
+                  <p>Capacity: {tour.capacity}</p>
+                </div>
+              </li>
+            ))}
           </ul>
         ) : <p>No tours to display</p>
       }

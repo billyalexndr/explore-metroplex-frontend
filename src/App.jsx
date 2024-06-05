@@ -7,6 +7,8 @@ import { RegisterPage } from './pages/Register';
 import { HomePage } from './pages/Home';
 import { NotFoundPage } from './pages/NotFound';
 import UserPage from './pages/User/UserPage';
+import { ProfilePage } from './pages/Profile';
+import CreateTourPage from './pages/CreateTourPage';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route element={<PersistLogin />}>
           <Route element={<RequiredAuth allowedRoles={['USER', 'ADMIN']} />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/add" element={<CreateTourPage />} />
           </Route>
 
           <Route element={<RequiredAuth allowedRoles={['ADMIN']} />}>
