@@ -4,11 +4,12 @@ import PersistLogin from './components/Auth/PersistLogin';
 import RequiredAuth from './components/Auth/RequiredAuth';
 import { LoginPage } from './pages/Login';
 import { RegisterPage } from './pages/Register';
-import { HomePage } from './pages/Home';
+import { UserPage } from './pages/Dashboard/User';
+import { AdminPage } from './pages/Dashboard/Admin';
+import { DestinationPage } from './pages/Dashboard/User/Destination';
+import { BuyTicketPage } from './pages/Dashboard/User/BuyTicket';
+import { DetailPage } from './pages/Dashboard/User/DetailDestination';
 import { NotFoundPage } from './pages/NotFound';
-import UserPage from './pages/User/UserPage';
-import { ProfilePage } from './pages/Profile';
-import CreateTourPage from './pages/CreateTourPage';
 
 function App() {
   return (
@@ -18,14 +19,15 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
 
         <Route element={<PersistLogin />}>
-          <Route element={<RequiredAuth allowedRoles={['USER', 'ADMIN']} />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/add" element={<CreateTourPage />} />
+          <Route element={<RequiredAuth allowedRoles={['USER']} />}>
+            <Route path="/user" element={<UserPage />} />
+            <Route path="/destination" element={<DestinationPage />} />
+            <Route path="/detail-destination" element={<DetailPage />} />
+            <Route path="/buy-ticket" element={<BuyTicketPage />} />
           </Route>
 
           <Route element={<RequiredAuth allowedRoles={['ADMIN']} />}>
-            <Route path="/user" element={<UserPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Route>
         </Route>
 
