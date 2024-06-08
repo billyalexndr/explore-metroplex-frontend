@@ -196,8 +196,15 @@ const api = (() => {
     return responseJson;
   }
 
-  async function getAllTour(signal) {
+  async function getAllTour({ signal, city = '', page = 1, limit = 10 }) {
+    const params = {};
+
+    if (city) params.city = city;
+    if (page) params.page = page;
+    if (limit) params.limit = limit;
+
     const response = await axios.get('/tours', {
+      params,
       signal,
     });
 

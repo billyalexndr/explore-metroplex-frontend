@@ -1,12 +1,52 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
+import useLogOut from '../../../../hooks/useLogOut';
+import api from '../../../../utils/api';
 
-const NavAdmin = () => {
+function NavAdmin() {
+  const axiosPrivate = useAxiosPrivate();
+  const [profile, setProfile] = useState();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const effectRun = useRef(false);
+  const logout = useLogOut();
+
+  const signOut = async () => {
+    await logout();
+  };
+
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getOwnProfile = async () => {
+      try {
+        const profile = await api.getOwnProfile({ axiosPrivate, signal: controller.signal });
+        if (isMounted) {
+          setProfile(profile);
+        }
+      } catch (error) {
+        navigate('/login', { state: { from: location }, replace: true });
+      }
+    };
+
+    if (effectRun.current) {
+      getOwnProfile();
+    }
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+      effectRun.current = true;
+    };
+  }, []);
+
   return (
     <nav className="sticky top-0 z-20 w-full bg-white border-b border-gray-200 drop-shadow-md start-0">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <Link
-          href="/"
+          to="/admin"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <span className="self-center text-[#006769] text-2xl font-semibold whitespace-nowrap dark:text-white">
@@ -35,23 +75,44 @@ const NavAdmin = () => {
                 Data User
               </Link>
             </li>
+            <li className="flex items-center">
+              <Link
+                to="/data-reservation"
+                className="block py-2 px-3 text-[#006769] rounded hover:font-bold"
+              >
+                Data Reservation
+              </Link>
+            </li>
             <li>
-              <div class="flex items-center gap-2">
-                <img
-                  class="w-10 h-10 rounded-full"
-                  src="/images/ronaldo.jpg"
-                  alt=""
-                />
-                <div class="font-medium text-[#006769] dark:text-white">
-                  <div>ADMIN</div>
-                </div>
-              </div>
+              <Link to="/profile">
+                {profile && (
+                  <div className="flex items-center gap-2">
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src={profile.profilePicture}
+                      alt={profile.username}
+                    />
+                    <div className="font-medium text-[#006769] dark:text-white">
+                      <div>{profile.name}</div>
+                    </div>
+                  </div>
+                )}
+              </Link>
+            </li>
+            <li>
+              <button
+                onClick={signOut}
+                type="button"
+                className="px-5 py-2 ml-2 text-sm font-medium text-white bg-red-700 rounded-lg focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring-red-300"
+              >
+                Logout
+              </button>
             </li>
           </ul>
         </div>
       </div>
     </nav>
   );
-};
+}
 
 export default NavAdmin;

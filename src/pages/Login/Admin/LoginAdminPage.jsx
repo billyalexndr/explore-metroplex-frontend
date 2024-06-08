@@ -1,16 +1,14 @@
 import React from 'react';
-import CloseButton from '../../components/Auth/CloseButton';
-import ImageSection from '../../components/Auth/ImageSection';
+import ImageSection from '../../../components/Auth/ImageSection';
 import FormSection from './components/FormSection';
 
-function LoginPage() {
+function LoginAdminPage() {
   return (
     <div className="flex h-screen bg-white">
-      <CloseButton />
       <ImageSection />
       <FormSection />
     </div>
   );
 }
 
-export default LoginPage;
+export default LoginAdminPage;

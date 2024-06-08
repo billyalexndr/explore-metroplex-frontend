@@ -1,34 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import useInput from '../../../../../hooks/useInput';
 
-function CardInputDestination({ destination, price, onSubmit }) {
-  const [name, onNameChange] = useInput('');
-  const [phone, onPhoneChange] = useInput('');
-  const [email, onEmailChange] = useInput('');
-  const [ticket, onTicketChange] = useInput(1);
-  const [subtotal, setSubtotal] = useState(0);
-  const [reservedAt, setReservedAt] = useState();
+function CardEditDestination({ destination, onSubmit }) {
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [price, setPrice] = useState(0);
+  const [capacity, setCapacity] = useState(0);
+  const [description, setDescription] = useState('');
+  const [address, setAddress] = useState('');
+  const [map, setMap] = useState('');
+  const [file, setFile] = useState();
 
   useEffect(() => {
-    const calculateSubtotal = () => {
-      const total = price * ticket;
-      setSubtotal(total);
-    };
-    calculateSubtotal();
-  }, [price, ticket]);
+    if (destination) {
+      setName(destination.name);
+      setCity(destination.city);
+      setPrice(destination.price);
+      setCapacity(destination.capacity);
+      setDescription(destination.description);
+      setAddress(destination.address);
+      setMap(destination.map);
+    }
+  }, [destination]);
+
+  const fileSelected = (event) => {
+    const file = event.target.files[0];
+    setFile(file);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit({
       name,
-      phone,
-      email,
-      ticket,
-      subtotal,
-      reservedAt,
+      city,
+      price,
+      capacity,
+      description,
+      address,
+      map,
+      file,
     });
   };
 
@@ -45,137 +55,133 @@ function CardInputDestination({ destination, price, onSubmit }) {
                 htmlFor="destination-name"
                 className="w-[150px] text-sm font-medium text-gray-900"
               >
-                Destination
+                Destination Name
               </label>
               <input
                 type="text"
                 id="destination-name"
-                value={destination}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="flex flex-row w-full px-6 py-2">
-            <div className="flex items-center w-full gap-5">
-              <label
-                htmlFor="name"
-                className="w-[150px] text-sm font-medium text-gray-900"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
                 value={name}
-                onChange={onNameChange}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
           </div>
           <div className="flex flex-row w-full px-6 py-2">
             <div className="flex items-center w-full gap-5">
               <label
-                htmlFor="phone"
+                htmlFor="destination-city"
                 className="w-[150px] text-sm font-medium text-gray-900"
               >
-                No. Handphone
+                City
               </label>
               <input
                 type="text"
-                id="phone"
+                id="destination-city"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
-                value={phone}
-                onChange={onPhoneChange}
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
               />
             </div>
           </div>
           <div className="flex flex-row w-full px-6 py-2">
             <div className="flex items-center w-full gap-5">
               <label
-                htmlFor="email"
+                htmlFor="price-ticket"
                 className="w-[150px] text-sm font-medium text-gray-900"
               >
-                E-Mail
-              </label>
-              <input
-                type="text"
-                id="email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
-                value={email}
-                onChange={onEmailChange}
-              />
-            </div>
-          </div>
-          <div className="flex flex-row w-full px-6 py-2">
-            <div className="flex items-center w-full gap-5">
-              <label
-                htmlFor="date"
-                className="w-[150px] text-sm font-medium text-gray-900"
-              >
-                Date
-              </label>
-              {/* <div className="relative flex-1">
-                <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                  <svg
-                    className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                  </svg>
-                </div>
-                <input
-                  datepicker
-                  type="text"
-                  id="date"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Select date"
-                />
-              </div> */}
-              <div className="relative flex-1">
-                <DatePicker
-                  selected={reservedAt}
-                  onChange={(date) => setReservedAt(date)}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholderText="Select date"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-row w-full px-6 py-2">
-            <div className="flex items-center w-full gap-5">
-              <label
-                htmlFor="email"
-                className="w-[150px] text-sm font-medium text-gray-900"
-              >
-                Total Tickets
+                Ticket Price
               </label>
               <input
                 type="number"
-                id="email"
+                id="price-ticket"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
-                value={ticket}
-                onChange={onTicketChange}
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value))}
               />
             </div>
           </div>
           <div className="flex flex-row w-full px-6 py-2">
             <div className="flex items-center w-full gap-5">
               <label
-                htmlFor="email"
+                htmlFor="capacity"
                 className="w-[150px] text-sm font-medium text-gray-900"
               >
-                Subtotal
+                Capacity
+              </label>
+              <input
+                type="number"
+                id="capacity"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
+                value={capacity}
+                onChange={(e) => setCapacity(Number(e.target.value))}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row w-full px-6 py-2">
+            <div className="flex items-center w-full gap-5">
+              <label
+                htmlFor="description"
+                className="w-[150px] text-sm font-medium text-gray-900"
+              >
+                Description
+              </label>
+              <textarea
+                type="text"
+                rows={3}
+                id="description"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row w-full px-6 py-2">
+            <div className="flex items-center w-full gap-5">
+              <label
+                htmlFor="address"
+                className="w-[150px] text-sm font-medium text-gray-900"
+              >
+                Address
               </label>
               <input
                 type="text"
-                id="email"
+                id="address"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
-                value={subtotal}
-                readOnly
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row w-full px-6 py-2">
+            <div className="flex items-center w-full gap-5">
+              <label
+                htmlFor="map"
+                className="w-[150px] text-sm font-medium text-gray-900"
+              >
+                Link Maps
+              </label>
+              <input
+                type="text"
+                id="map"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
+                value={map}
+                onChange={(e) => setMap(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row w-full px-6 py-2">
+            <div className="flex items-center w-full gap-5">
+              <label
+                htmlFor="file"
+                className="w-[150px] text-sm font-medium text-gray-900"
+              >
+                Upload Image
+              </label>
+              <input
+                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none flex-1"
+                id="file"
+                type="file"
+                onChange={fileSelected}
               />
             </div>
           </div>
@@ -184,7 +190,7 @@ function CardInputDestination({ destination, price, onSubmit }) {
               type="submit"
               className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
-              Order
+              Save
             </button>
           </div>
         </form>
@@ -193,10 +199,17 @@ function CardInputDestination({ destination, price, onSubmit }) {
   );
 }
 
-CardInputDestination.propTypes = {
-  destination: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+CardEditDestination.propTypes = {
+  destination: PropTypes.shape({
+    name: PropTypes.string,
+    city: PropTypes.string,
+    price: PropTypes.number,
+    capacity: PropTypes.number,
+    description: PropTypes.string,
+    address: PropTypes.string,
+    map: PropTypes.string,
+  }).isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default CardInputDestination;
+export default CardEditDestination;

@@ -1,8 +1,8 @@
 import React from 'react';
-import ImageSection from '../../components/Auth/ImageSection';
+import ImageSection from '../../../components/Auth/ImageSection';
 import FormSection from './components/FormSection';
 
-function RegisterPage() {
+function LoginPage() {
   return (
     <div className="flex h-screen bg-white">
       <ImageSection />
@@ -11,4 +11,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default LoginPage;

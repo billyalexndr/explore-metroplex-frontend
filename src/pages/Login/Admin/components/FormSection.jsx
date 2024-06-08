@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import api from '../../../utils/api';
-import TextInput from '../../../components/Auth/TextInput';
-import useInput from '../../../hooks/useInput';
-import useAuth from '../../../hooks/useAuth';
+import api from '../../../../utils/api';
+import TextInput from '../../../../components/Auth/TextInput';
+import useInput from '../../../../hooks/useInput';
+import useAuth from '../../../../hooks/useAuth';
+import useLogOut from '../../../../hooks/useLogOut';
 
 function FormSection() {
   const { setAuth } = useAuth();
@@ -13,7 +14,8 @@ function FormSection() {
   const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || '/admin';
+  const logout = useLogOut();
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -22,11 +24,17 @@ function FormSection() {
     try {
       const token = await api.login({ email, password });
       const { id, name, username, role } = jwtDecode(token);
+
+      if (role !== 'ADMIN') {
+        throw new Error('Admin Account not found');
+      }
+
       setAuth({ user: { id, name, username, email }, role, accessToken: token });
 
       navigate(from, { replace: true });
     } catch (error) {
-      setErrMsg(error.response.data.message || 'login failed');
+      setErrMsg(error.message || error.response.data.message || 'login failed');
+      await logout();
     }
   };
 
@@ -34,11 +42,8 @@ function FormSection() {
     <div className="w-full lg:w-1/2 flex items-center justify-center">
       <div className="max-w-md w-full p-6 flex flex-col">
         <div className="flex flex-col py-10 gap-y-3">
-          <h1 className="text-lg mb-2 text-gray-800 font-semibold text-center">
-            WELCOME TO
-          </h1>
           <h1 className="md:text-3xl text-2xl font-semibold text-[#006769] text-center">
-            EXPLORE METROPLEX
+            LOGIN ADMIN
           </h1>
         </div>
         <div className="space-y-4">
@@ -94,17 +99,6 @@ function FormSection() {
               </button>
             </div>
           </form>
-        </div>
-        <div className="mt-2 text-sm text-gray-600 text-center">
-          <p>
-            Don&apos;t have an account?{' '}
-            <Link
-              to="/register"
-              className="text-[#006769] hover:text-white font-semibold hover:bg-[#40A578] hover:p-1 hover:rounded-md"
-            >
-              Sign Up Now
-            </Link>
-          </p>
         </div>
       </div>
     </div>

@@ -1,11 +1,44 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import NavUser from '../components/NavUser';
 import Footer from '../../../../components/Dashboard/Footer';
 import SearchBar from '../../../../components/Dashboard/SearchBar';
 import DestUserCard from './components/DestUserCard';
 import Pagination from '../../../../components/Dashboard/Pagination';
+import api from '../../../../utils/api';
 
-const DestinationPage = () => {
+function DestinationPage() {
+  const [tours, setTours] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const effectRun = useRef(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getTours = async () => {
+      try {
+        const tours = await api.getAllTour({ signal: controller.signal });
+        if (isMounted) {
+          setTours(tours);
+        }
+      } catch (error) {
+        navigate('/login', { state: { from: location }, replace: true });
+      }
+    };
+
+    if (effectRun.current) {
+      getTours();
+    }
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+      effectRun.current = true;
+    };
+  }, []);
+
   return (
     <div>
       <NavUser />
@@ -15,12 +48,12 @@ const DestinationPage = () => {
           <button
             id="dropdownDefaultButton"
             data-dropdown-toggle="dropdown"
-            class="w-1/4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="w-1/4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="button"
           >
             -- Select city --
             <svg
-              class="w-2.5 h-2.5 ms-3"
+              className="w-2.5 h-2.5 ms-3"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -28,9 +61,9 @@ const DestinationPage = () => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m1 1 4 4 4-4"
               />
             </svg>
@@ -38,16 +71,16 @@ const DestinationPage = () => {
 
           <div
             id="dropdown"
-            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+            className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
           >
             <ul
-              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              className="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownDefaultButton"
             >
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Dashboard
                 </a>
@@ -55,7 +88,7 @@ const DestinationPage = () => {
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Settings
                 </a>
@@ -63,7 +96,7 @@ const DestinationPage = () => {
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Earnings
                 </a>
@@ -71,7 +104,7 @@ const DestinationPage = () => {
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   Sign out
                 </a>
@@ -82,7 +115,7 @@ const DestinationPage = () => {
           {/* <Link
             to="/add-destination"
             type="button"
-            class="w-1/3 flex items-center justify-center text-white mr-10 bg-[#40A578] hover:bg-[#006769] focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            className="w-1/3 flex items-center justify-center text-white mr-10 bg-[#40A578] hover:bg-[#006769] focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
           >
             <p className="flex items-center justify-center">
               Add Destination
@@ -93,10 +126,16 @@ const DestinationPage = () => {
         <div className="flex flex-col items-center justify-center text-3xl font-bold mt-7">
           <h1 className="text-[#006769]">Where Do You Want to Explore?</h1>
           <div className="flex items-center justify-center gap-4 mt-4">
-            <DestUserCard />
-            <DestUserCard />
-            <DestUserCard />
-            <DestUserCard />
+            {tours.map((tour) => (
+              <DestUserCard
+                key={tour.id}
+                id={tour.id}
+                photo={tour.photo}
+                name={tour.name}
+                description={tour.description}
+                rating={tour.rating}
+              />
+            ))}
           </div>
           <div className="flex items-center justify-center w-full mt-7">
             <Pagination />
@@ -108,6 +147,6 @@ const DestinationPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default DestinationPage;

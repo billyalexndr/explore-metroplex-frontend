@@ -1,19 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import api from '../../utils/api';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import useLogOut from '../../hooks/useLogOut';
 
 function ProfilePage() {
+  const axiosPrivate = useAxiosPrivate();
   const [profile, setProfile] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({ name: '', username: '', email: '' });
   const [originalData, setOriginalData] = useState({});
   const [errMsg, setErrMsg] = useState('');
-  const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
+  const logout = useLogOut();
 
   useEffect(() => {
     let isMounted = true;
@@ -42,7 +44,7 @@ function ProfilePage() {
       controller.abort();
       effectRun.current = true;
     };
-  }, [axiosPrivate, navigate, location]);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -77,6 +79,21 @@ function ProfilePage() {
     setIsEditing(false);
     setFormData(originalData);
     setErrMsg('');
+  };
+
+  const handleDeleteUser = async () => {
+    if (window.confirm('Are you sure you want to delete your account?')) {
+      try {
+        await api.deleteUser({
+          axiosPrivate,
+          signal: new AbortController().signal,
+          id: profile.id,
+        });
+        await logout();
+      } catch (error) {
+        setErrMsg(error.response.data.message);
+      }
+    }
   };
 
   return (
@@ -172,6 +189,18 @@ function ProfilePage() {
               onClick={() => setIsEditing(true)}
             />
           )}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+            <Link to="/profile/update-password">
+              Update Password
+            </Link>
+            <button
+              type="button"
+              className="px-4 py-2 bg-blue-500 text-white rounded mr-4"
+              onClick={handleDeleteUser}
+            >
+              Delete User
+            </button>
+          </div>
         </div>
       )}
     </div>

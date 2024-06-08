@@ -1,44 +1,46 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import api from '../../../../utils/api';
-// import useLogOut from '../../../../hooks/useLogOut';
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
+import useLogOut from '../../../../hooks/useLogOut';
+import api from '../../../../utils/api';
 
-const NavAdmin = () => {
-  // const [tours, setTours] = useState();
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const effectRun = useRef(false);
-  // const logout = useLogOut();
+function NavUser() {
+  const axiosPrivate = useAxiosPrivate();
+  const [profile, setProfile] = useState();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const effectRun = useRef(false);
+  const logout = useLogOut();
 
-  // const signOut = async () => {
-  //   await logout();
-  // };
+  const signOut = async () => {
+    await logout();
+  };
 
-  // useEffect(() => {
-  //   let isMounted = true;
-  //   const controller = new AbortController();
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
 
-  //   const getTours = async () => {
-  //     try {
-  //       const tours = await api.getAllTour(controller.signal);
-  //       if (isMounted) {
-  //         setTours(tours);
-  //       }
-  //     } catch (error) {
-  //       navigate('/login', { state: { from: location }, replace: true });
-  //     }
-  //   };
+    const getOwnProfile = async () => {
+      try {
+        const profile = await api.getOwnProfile({ axiosPrivate, signal: controller.signal });
+        if (isMounted) {
+          setProfile(profile);
+        }
+      } catch (error) {
+        navigate('/login', { state: { from: location }, replace: true });
+      }
+    };
 
-  //   if (effectRun.current) {
-  //     getTours();
-  //   }
+    if (effectRun.current) {
+      getOwnProfile();
+    }
 
-  //   return () => {
-  //     isMounted = false;
-  //     controller.abort();
-  //     effectRun.current = true;
-  //   };
-  // }, []);
+    return () => {
+      isMounted = false;
+      controller.abort();
+      effectRun.current = true;
+    };
+  }, []);
 
   return (
     <nav className="sticky top-0 z-20 w-full bg-white border-b border-gray-200 drop-shadow-md start-0">
@@ -73,20 +75,32 @@ const NavAdmin = () => {
                 Destination
               </Link>
             </li>
+            <li className="flex items-center">
+              <Link
+                to="/reservation"
+                className="block py-2 px-3 text-[#006769] rounded hover:font-bold"
+              >
+                Reservation
+              </Link>
+            </li>
             <li>
-              <div class="flex items-center justify-center gap-2">
-                <img
-                  class="w-10 h-10 rounded-full"
-                  src="/images/ronaldo.jpg"
-                  alt=""
-                />
-                {/* <button
+              <div className="flex items-center justify-center gap-2">
+                <Link to="/profile">
+                  {profile && (
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src={profile.profilePicture}
+                      alt={profile.username}
+                    />
+                  )}
+                </Link>
+                <button
                   onClick={signOut}
                   type="button"
                   className="px-5 py-2 ml-2 text-sm font-medium text-white bg-red-700 rounded-lg focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring-red-300"
                 >
                   Logout
-                </button> */}
+                </button>
               </div>
             </li>
           </ul>
@@ -94,6 +108,6 @@ const NavAdmin = () => {
       </div>
     </nav>
   );
-};
+}
 
-export default NavAdmin;
+export default NavUser;

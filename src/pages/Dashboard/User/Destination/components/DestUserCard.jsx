@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   FaRegHeart,
   FaHeart,
@@ -8,33 +9,40 @@ import {
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const DestUserCard = () => {
+function DestUserCard({ id, photo, name, description, rating }) {
   return (
-    <div class="w-1/4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-1/4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <a href="#">
-        <img class="rounded-t-lg" src="/images/gedung.jpg" alt="" />
+        <img className="rounded-t-lg" src={photo} alt={id} />
       </a>
-      <div class="p-5">
-        <Link to="/detail-destination">
-          <h5 class="mb-2 text-justify text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Noteworthy technology acquisitions 2021
+      <div className="p-5">
+        <Link to={`/detail-destination/${id}`}>
+          <h5 className="mb-2 text-justify text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {name}
           </h5>
         </Link>
-        <p class="mb-3 text-justify text-base font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
+        <p className="mb-3 text-justify text-base font-normal text-gray-700 dark:text-gray-400">
+          {description}
         </p>
         <div className="flex justify-between">
           <div>
-            <button className="flex items-center justify-center gap-2 text-yellow-400">
+            <span className="flex items-center justify-center gap-2 text-yellow-400">
               <FaStar size={20} />
-              <p className="mt-1 text-base text-black">4.8</p>
-            </button>
+              <p className="mt-1 text-base text-black">{rating.toFixed(1)}</p>
+            </span>
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+DestUserCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  photo: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
 };
 
 export default DestUserCard;
