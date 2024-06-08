@@ -7,13 +7,19 @@ function RequiredAuth({ allowedRoles }) {
   const { auth } = useAuth();
   const location = useLocation();
 
-  return (
-    allowedRoles.includes(auth?.role)
-      ? <Outlet />
-      : auth?.user
-        ? <Navigate to="/" state={{ from: location }} replace />
-        : <Navigate to="/login" state={{ from: location }} replace />
-  );
+  if (!auth || !auth.user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  if (!allowedRoles.includes(auth.role)) {
+    if (auth.role === 'ADMIN') {
+      return <Navigate to="/admin" state={{ from: location }} replace />;
+    } else {
+      return <Navigate to="/" state={{ from: location }} replace />;
+    }
+  }
+
+  return <Outlet />;
 }
 
 RequiredAuth.propTypes = {

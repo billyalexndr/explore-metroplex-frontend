@@ -1,5 +1,5 @@
 import useAuth from './useAuth';
-import axios from '../api/axios';
+import api from '../utils/api';
 
 const useLogOut = () => {
   const { setAuth } = useAuth();
@@ -7,11 +7,9 @@ const useLogOut = () => {
   const logout = async () => {
     setAuth({});
     try {
-      await axios.delete('/logout', {
-        withCredentials: true,
-      });
+      await api.logout();
     } catch (error) {
-      alert(error);
+      alert(error.response.data.message);
     }
   };
 

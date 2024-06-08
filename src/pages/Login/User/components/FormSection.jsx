@@ -1,32 +1,40 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import api from '../../../utils/api';
-import TextInput from '../../../components/Auth/TextInput';
-import useInput from '../../../hooks/useInput';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+import api from '../../../../utils/api';
+import TextInput from '../../../../components/Auth/TextInput';
+import useInput from '../../../../hooks/useInput';
+import useAuth from '../../../../hooks/useAuth';
+import useLogOut from '../../../../hooks/useLogOut';
 
 function FormSection() {
-  const [name, onNameChange] = useInput('');
-  const [username, onUsernameChange] = useInput('');
+  const { setAuth } = useAuth();
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
   const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+  const logout = useLogOut();
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     setErrMsg('');
 
     try {
-      await api.register({
-        name,
-        username,
-        email,
-        password,
-      });
+      const token = await api.login({ email, password });
+      const { id, name, username, role } = jwtDecode(token);
 
-      navigate('/login');
+      if (role !== 'USER') {
+        throw new Error('User Account not found');
+      }
+
+      setAuth({ user: { id, name, username, email }, role, accessToken: token });
+
+      navigate(from, { replace: true });
     } catch (error) {
-      setErrMsg(error.response.data.message || 'registration failed');
+      setErrMsg(error.message || error.response.data.message || 'login failed');
+      await logout();
     }
   };
 
@@ -34,8 +42,11 @@ function FormSection() {
     <div className="w-full lg:w-1/2 flex items-center justify-center">
       <div className="max-w-md w-full p-6 flex flex-col">
         <div className="flex flex-col py-10 gap-y-3">
+          <h1 className="text-lg mb-2 text-gray-800 font-semibold text-center">
+            WELCOME TO
+          </h1>
           <h1 className="md:text-3xl text-2xl font-semibold text-[#006769] text-center">
-            CREATE ACCOUNT
+            EXPLORE METROPLEX
           </h1>
         </div>
         <div className="space-y-4">
@@ -43,53 +54,7 @@ function FormSection() {
           <form onSubmit={onSubmitHandler} className="flex flex-col gap-y-1">
             <TextInput
               type="text"
-              id="name"
-              placeholder="Name"
-              icon={(
-                <svg
-                  className="w-6 h-6 text-gray-400 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              )}
-              inputHandler={onNameChange}
-            />
-            <TextInput
-              type="text"
-              id="username"
-              placeholder="Username"
-              icon={(
-                <svg
-                  className="w-6 h-6 text-gray-400 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              )}
-              inputHandler={onUsernameChange}
-            />
-            <TextInput
-              type="text"
-              id="email"
+              id="email-address-icon"
               placeholder="Email"
               icon={(
                 <svg
@@ -99,8 +64,8 @@ function FormSection() {
                   fill="currentColor"
                   viewBox="0 0 20 16"
                 >
-                  <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
-                  <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+                  <path d="M10.036 8.278L19.294.488A1.979 1.979 0 0018 0H2A1.987 1.987 0 00.641.541l9.395 7.737z" />
+                  <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 002 2h16a2 2 0 002-2V2.5L11.241 9.817z" />
                 </svg>
               )}
               inputHandler={onEmailChange}
@@ -121,7 +86,7 @@ function FormSection() {
                 >
                   <path
                     fillRule="evenodd"
-                    d="M8 10V7a4 4 0 1 1 8 0v3h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2-3a2 2 0 1 1 4 0v3h-4V7Zm2 6a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Z"
+                    d="M8 10V7a4 4 0 118 0v3h1a2 2 0 012 2v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7a2 2 0 012-2h1Zm2-3a2 2 0 114 0v3h-4V7Zm2 6a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1Z"
                     clipRule="evenodd"
                   />
                 </svg>
@@ -133,19 +98,19 @@ function FormSection() {
                 type="submit"
                 className="w-full bg-gradient-to-r from-[#006769] to-[#40A578] font-semibold p-2 rounded-full text-white shadow-sm focus:bg-[#006769] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-900 transition-colors duration-300"
               >
-                SIGN UP
+                SIGN IN
               </button>
             </div>
           </form>
         </div>
         <div className="mt-2 text-sm text-gray-600 text-center">
           <p>
-            Already have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link
-              to="/login"
+              to="/register"
               className="text-[#006769] hover:text-white font-semibold hover:bg-[#40A578] hover:p-1 hover:rounded-md"
             >
-              Sign In Now
+              Sign Up Now
             </Link>
           </p>
         </div>
@@ -153,5 +118,8 @@ function FormSection() {
     </div>
   );
 }
+
+FormSection.propTypes = {
+};
 
 export default FormSection;
