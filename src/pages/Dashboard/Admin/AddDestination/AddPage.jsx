@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
-import CardInputDestination from '../components/CardInputDestination';
+import CardInputDestination from './components/CardInputDestination';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
 
@@ -10,7 +10,14 @@ function AddPage() {
   const navigate = useNavigate();
 
   const onSubmitHandler = async ({
-    name, city, price, capacity, description, address, map, file,
+    name,
+    city,
+    price,
+    capacity,
+    description,
+    address,
+    map,
+    file,
   }) => {
     try {
       await api.createTour({

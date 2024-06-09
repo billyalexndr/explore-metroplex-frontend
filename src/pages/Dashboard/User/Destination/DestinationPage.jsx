@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 import NavUser from '../components/NavUser';
 import Footer from '../../../../components/Dashboard/Footer';
 import SearchBar from '../../../../components/Dashboard/SearchBar';
@@ -12,6 +14,11 @@ function DestinationPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  const toursPerPage = 4;
+  const pagesVisited = pageNumber * toursPerPage;
+
+  const options = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
 
   useEffect(() => {
     let isMounted = true;
@@ -39,13 +46,40 @@ function DestinationPage() {
     };
   }, []);
 
+  const displayTours = tours
+    .slice(pagesVisited, pagesVisited + toursPerPage)
+    .map((tour) => (
+      <DestUserCard
+        key={tour.id}
+        id={tour.id}
+        photo={tour.photo}
+        name={tour.name}
+        description={tour.description}
+        rating={tour.rating}
+      />
+    ));
+
+  const pageCount = Math.ceil(tours.length / toursPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
   return (
     <div>
       <NavUser />
       <div className="mx-10">
         <div className="flex mx-0 mt-7 w-full items-center justify-center gap-[550px]">
           <SearchBar />
-          <button
+          {/* <Dropdown
+            options={options}
+            onChange={(option) => setCity(option.value)}
+            value={city}
+            placeholder="-- choose city --"
+            controlClassName="w-full text-center"
+            menuClassName="w-full text-center"
+          /> */}
+          {/* <button
             id="dropdownDefaultButton"
             data-dropdown-toggle="dropdown"
             className="w-1/4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -67,8 +101,7 @@ function DestinationPage() {
                 d="m1 1 4 4 4-4"
               />
             </svg>
-          </button>
-
+          </button> */}
           <div
             id="dropdown"
             className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
@@ -111,7 +144,6 @@ function DestinationPage() {
               </li>
             </ul>
           </div>
-
           {/* <Link
             to="/add-destination"
             type="button"
@@ -126,19 +158,10 @@ function DestinationPage() {
         <div className="flex flex-col items-center justify-center text-3xl font-bold mt-7">
           <h1 className="text-[#006769]">Where Do You Want to Explore?</h1>
           <div className="flex items-center justify-center gap-4 mt-4">
-            {tours.map((tour) => (
-              <DestUserCard
-                key={tour.id}
-                id={tour.id}
-                photo={tour.photo}
-                name={tour.name}
-                description={tour.description}
-                rating={tour.rating}
-              />
-            ))}
+            {displayTours}
           </div>
           <div className="flex items-center justify-center w-full mt-7">
-            <Pagination />
+            <Pagination pageCount={pageCount} changePage={changePage} />
           </div>
         </div>
       </div>

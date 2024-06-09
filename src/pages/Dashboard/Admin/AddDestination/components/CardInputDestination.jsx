@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
+import Dropdown from 'react-dropdown';
+import { FaCaretDown } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import useInput from '../../../../hooks/useInput';
+import useInput from '../../../../../hooks/useInput';
+import 'react-dropdown/style.css';
 
 function CardInputDestination({ onSubmit }) {
   const [name, onNameChange] = useInput('');
-  const [city, onCityChange] = useInput('');
+  const [city, setCity] = useState('');
   const [price, onPriceChange] = useInput(0);
   const [capacity, onCapacityChange] = useInput(0);
   const [description, onDescriptionChange] = useInput('');
   const [address, onAddressChange] = useInput('');
   const [map, onMapChange] = useInput('');
   const [file, setFile] = useState();
+
+  const options = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
 
   const fileSelected = (event) => {
     const file = event.target.files[0];
@@ -63,92 +68,18 @@ function CardInputDestination({ onSubmit }) {
               >
                 City
               </label>
-              <input
-                type="text"
-                id="destination-city"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
-                value={city}
-                onChange={onCityChange}
-              />
-            </div>
-          </div>
-          {/* <div className="flex flex-row w-full px-6 py-2">
-            <div className="flex items-center w-full gap-5">
-              <label
-                htmlFor="city"
-                className="w-[150px] text-sm font-medium text-gray-900"
-              >
-                City
-              </label>
-
-              <button
-                id="dropdownDefaultButton"
-                data-dropdown-toggle="dropdown"
-                className="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 flex-1 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                type="button"
-              >
-                Dropdown button
-                <svg
-                  className="w-2.5 h-2.5 ms-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-
-              <div
-                id="dropdown"
-                className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-              >
-                <ul
-                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                  aria-labelledby="dropdownDefaultButton"
-                >
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Dashboard
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Earnings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Sign out
-                    </a>
-                  </li>
-                </ul>
+              <div className="relative flex-1">
+                <Dropdown
+                  options={options}
+                  onChange={(option) => setCity(option.value)}
+                  value={city}
+                  placeholder="-- choose city --"
+                  controlClassName="w-full text-center"
+                  menuClassName="w-full text-center"
+                />
               </div>
             </div>
-          </div> */}
+          </div>
           <div className="flex flex-row w-full px-6 py-2">
             <div className="flex items-center w-full gap-5">
               <label
@@ -192,11 +123,11 @@ function CardInputDestination({ onSubmit }) {
                 Description
               </label>
               <textarea
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
+                value={description}
                 type="text"
                 rows={3}
                 id="price-ticket"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
-                value={description}
                 onChange={onDescriptionChange}
               />
             </div>
@@ -244,7 +175,7 @@ function CardInputDestination({ onSubmit }) {
                 Upload Image
               </label>
               <input
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none flex-1"
+                className="flex-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none"
                 id="default_size"
                 type="file"
                 onChange={fileSelected}

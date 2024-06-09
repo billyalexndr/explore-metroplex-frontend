@@ -3,7 +3,16 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function DetailDestination({
-  id, name, address, photo, visitor, capacity, updatedAt, description, price, map,
+  id,
+  name,
+  address,
+  photo,
+  visitor,
+  capacity,
+  updatedAt,
+  description,
+  price,
+  map,
 }) {
   return (
     <>
@@ -12,10 +21,7 @@ function DetailDestination({
           <h1 className="text-3xl font-bold tracking-tight text-emerald-700 dark:text-white">
             {name}
           </h1>
-          <p className="text-lg mt-2.5">
-            {' '}
-            {address}
-          </p>
+          <p className="text-lg mt-2.5"> {address}</p>
         </div>
         <div className="text-center">
           <Link
@@ -29,18 +35,15 @@ function DetailDestination({
       </div>
       <div className="flex md:flex-row">
         <div className="w-1/2 bg-white">
-          <img
-            className="rounded-md"
-            src={photo}
-            alt={name}
-          />
+          <img className="rounded-md w-full h-[350px]" src={photo} alt={name} />
           <div className="flex justify-between my-3">
             <div>
               <p className="mb-3 text-base font-bold tracking-tight text-gray-900 dark:text-white">
                 Total visitors: {visitor}
               </p>
               <p className="text-sm italic text-gray-700 dark:text-gray-400">
-                Update {new Date(updatedAt).toLocaleDateString('en-US', {
+                Update{' '}
+                {new Date(updatedAt).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
@@ -51,9 +54,7 @@ function DetailDestination({
         </div>
         <div className="w-1/2 ml-4 bg-white">
           <div className="mb-5 text-lg text-gray-900 dark:text-white">
-            <p>
-              {description}
-            </p>
+            <p>{description}</p>
           </div>
           <div className="flex mb-5">
             <svg

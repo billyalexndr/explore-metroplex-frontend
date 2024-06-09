@@ -18,7 +18,11 @@ function UserPage() {
 
     const getTours = async () => {
       try {
-        const tours = await api.getAllTour({ signal: controller.signal, page: 1, limit: 4 });
+        const tours = await api.getAllTour({
+          signal: controller.signal,
+          page: 1,
+          limit: 4,
+        });
         if (isMounted) {
           setTours(tours);
         }
@@ -104,7 +108,7 @@ function UserPage() {
         <div className="flex gap-4">
           <div
             href="#"
-            className="block mt-4 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            className="block max-w-sm p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
           >
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Taman Mini Indonesia
@@ -117,15 +121,16 @@ function UserPage() {
               />
               <p className="text-xl font-bold">Ronaldo</p>
             </div>
-            <p className="font-normal text-base text-gray-700 dark:text-gray-400">
-              TMII is a cultural delight! Each pavilion showcases Indonesia&apos;s
-              diverse heritage vividly. From traditional houses to lively
-              performances, it&apos;s an immersive journey through Indonesia.
+            <p className="text-base font-normal text-gray-700 dark:text-gray-400">
+              TMII is a cultural delight! Each pavilion showcases
+              Indonesia&apos;s diverse heritage vividly. From traditional houses
+              to lively performances, it&apos;s an immersive journey through
+              Indonesia.
             </p>
           </div>
           <div
             href="#"
-            className="block mt-4 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            className="block max-w-sm p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
           >
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               Taman Mini Indonesia
@@ -138,10 +143,11 @@ function UserPage() {
               />
               <p className="text-xl font-bold">Ronaldo</p>
             </div>
-            <p className="font-normal text-base text-gray-700 dark:text-gray-400">
-              TMII is a cultural delight! Each pavilion showcases Indonesia&apos;s
-              diverse heritage vividly. From traditional houses to lively
-              performances, it&apos;s an immersive journey through Indonesia.
+            <p className="text-base font-normal text-gray-700 dark:text-gray-400">
+              TMII is a cultural delight! Each pavilion showcases
+              Indonesia&apos;s diverse heritage vividly. From traditional houses
+              to lively performances, it&apos;s an immersive journey through
+              Indonesia.
             </p>
           </div>
         </div>

@@ -13,6 +13,9 @@ import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 function AdminPage() {
   const axiosPrivate = useAxiosPrivate();
   const [tours, setTours] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const toursPerPage = 4;
+  const pagesVisited = pageNumber * toursPerPage;
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
@@ -58,6 +61,26 @@ function AdminPage() {
     }
   };
 
+  const displayTours = tours
+    .slice(pagesVisited, pagesVisited + toursPerPage)
+    .map((tour) => (
+      <DestAdminCard
+        key={tour.id}
+        id={tour.id}
+        photo={tour.photo}
+        name={tour.name}
+        description={tour.description}
+        rating={tour.rating}
+        onDelete={handleDeleteTour}
+      />
+    ));
+
+  const pageCount = Math.ceil(tours.length / toursPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
   return (
     <div>
       <NavAdmin />
@@ -78,21 +101,11 @@ function AdminPage() {
         <div className="flex items-center justify-center mt-7">
           <Badge />
         </div>
-        <div className="flex gap-4 mt-7">
-          {tours.map((tour) => (
-            <DestAdminCard
-              key={tour.id}
-              id={tour.id}
-              photo={tour.photo}
-              name={tour.name}
-              description={tour.description}
-              rating={tour.rating}
-              onDelete={handleDeleteTour}
-            />
-          ))}
+        <div className="flex items-center justify-center gap-4 mt-7">
+          {displayTours}
         </div>
         <div className="flex items-center justify-center w-full mt-7">
-          <Pagination />
+          <Pagination pageCount={pageCount} changePage={changePage} />
         </div>
       </div>
       <div className="mt-7">
