@@ -44,7 +44,6 @@ function UserPage() {
 
   return (
     <div>
-      <NavUser />
       <div className="relative">
         <img
           className="w-full h-screen rounded-t-lg"
@@ -157,9 +156,6 @@ function UserPage() {
         >
           View All
         </button>
-      </div>
-      <div className="mt-7">
-        <Footer />
       </div>
     </div>
   );

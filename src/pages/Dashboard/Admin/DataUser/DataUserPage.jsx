@@ -23,7 +23,10 @@ function DataUserPage() {
 
     const getUsers = async () => {
       try {
-        const users = await api.getAllUser({ axiosPrivate, signal: controller.signal });
+        const users = await api.getAllUser({
+          axiosPrivate,
+          signal: controller.signal,
+        });
         if (isMounted) {
           setUsers(users);
         }
@@ -60,7 +63,6 @@ function DataUserPage() {
 
   return (
     <div>
-      <NavAdmin />
       <div className="flex items-center justify-center">
         <div className="w-3/4">
           <div className="flex flex-col mt-7 font-bold text-[#006769] justify-center items-center">
@@ -69,15 +71,16 @@ function DataUserPage() {
           </div>
           {/* <SearchBar /> */}
           <div className="mt-7">
-            <TableUser users={users} onDelete={handleDeleteUser} loggedInUserId={auth.user.id} />
+            <TableUser
+              users={users}
+              onDelete={handleDeleteUser}
+              loggedInUserId={auth.user.id}
+            />
           </div>
           {/* <div className="flex items-center justify-center w-full mt-7">
             <Pagination />
           </div> */}
         </div>
-      </div>
-      <div className="mt-7">
-        <Footer />
       </div>
     </div>
   );

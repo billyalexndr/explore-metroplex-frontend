@@ -63,7 +63,6 @@ function DetailPageUser() {
 
   return (
     <div className="w-full">
-      <NavUser />
       <section className="p-6">
         {tour && (
           <>
@@ -84,7 +83,6 @@ function DetailPageUser() {
           </>
         )}
       </section>
-      <Footer />
     </div>
   );
 }

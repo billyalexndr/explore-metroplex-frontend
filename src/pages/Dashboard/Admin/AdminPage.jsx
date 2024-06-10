@@ -83,7 +83,6 @@ function AdminPage() {
 
   return (
     <div>
-      <NavAdmin />
       <div className="mx-10">
         <div className="flex mx-0 mt-7 w-full items-center justify-center gap-[550px]">
           <SearchBar />
@@ -107,9 +106,6 @@ function AdminPage() {
         <div className="flex items-center justify-center w-full mt-7">
           <Pagination pageCount={pageCount} changePage={changePage} />
         </div>
-      </div>
-      <div className="mt-7">
-        <Footer />
       </div>
     </div>
   );

@@ -21,7 +21,10 @@ function DataUserPage() {
 
     const getReservations = async () => {
       try {
-        const reservations = await api.getReservations({ axiosPrivate, signal: controller.signal });
+        const reservations = await api.getReservations({
+          axiosPrivate,
+          signal: controller.signal,
+        });
         if (isMounted) {
           setReservations(reservations);
         }
@@ -43,7 +46,6 @@ function DataUserPage() {
 
   return (
     <div>
-      <NavAdmin />
       <div className="flex items-center justify-center">
         <div className="w-3/4">
           <div className="flex flex-col mt-7 font-bold text-[#006769] justify-center items-center">
@@ -58,9 +60,6 @@ function DataUserPage() {
             <Pagination />
           </div> */}
         </div>
-      </div>
-      <div className="mt-7">
-        <Footer />
       </div>
     </div>
   );

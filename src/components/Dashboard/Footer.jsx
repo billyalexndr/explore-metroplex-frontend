@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function footer() {
+function Footer() {
   return (
-    <footer className="bg-[#9DB0B7]">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <footer className="bg-[#9DB0B7] mt-7">
+      <div className="w-full max-w-screen-xl p-4 py-6 mx-auto lg:py-8">
         <div className="md:flex md:justify-between">
-          <div className="mb-6 md:mb-0 max-w-xs">
+          <div className="max-w-xs mb-6 md:mb-0">
             <Link to="#" className="flex items-center mb-4">
-              <span className="self-center text-2xl italic font-semibold whitespace-nowrap text-white">
+              <span className="self-center text-2xl italic font-semibold text-white whitespace-nowrap">
                 Explore Metroplex
               </span>
             </Link>
@@ -18,7 +18,7 @@ function footer() {
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3 md:flex md:justify-end">
             <div>
-              <ul className="text-white dark:text-white font-medium">
+              <ul className="font-medium text-white dark:text-white">
                 <li className="mb-4">
                   <Link to="#" className="hover:underline">
                     Destinations
@@ -37,7 +37,7 @@ function footer() {
               </ul>
             </div>
             <div>
-              <ul className="text-white dark:text-white font-medium">
+              <ul className="font-medium text-white dark:text-white">
                 <li className="mb-4">
                   <Link to="#" className="hover:underline ">
                     Terms &amp; Conditions
@@ -56,10 +56,10 @@ function footer() {
               </ul>
             </div>
             <div>
-              <ul className="text-white dark:text-white font-medium">
-                <li className="mb-4 flex items-center">
+              <ul className="font-medium text-white dark:text-white">
+                <li className="flex items-center mb-4">
                   <svg
-                    className="w-6 h-6 text-white dark:text-white mr-2"
+                    className="w-6 h-6 mr-2 text-white dark:text-white"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -78,9 +78,9 @@ function footer() {
                     @explore_metroplex
                   </Link>
                 </li>
-                <li className="mb-4 flex items-center">
+                <li className="flex items-center mb-4">
                   <svg
-                    className="w-6 h-6 text-white dark:text-white mr-2"
+                    className="w-6 h-6 mr-2 text-white dark:text-white"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -99,9 +99,9 @@ function footer() {
                     exploremetroplex@gmail.com
                   </Link>
                 </li>
-                <li className="mb-4 flex items-center">
+                <li className="flex items-center mb-4">
                   <svg
-                    className="w-6 h-6 text-white dark:text-white mr-2"
+                    className="w-6 h-6 mr-2 text-white dark:text-white"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -138,4 +138,4 @@ function footer() {
   );
 }
 
-export default footer;
+export default Footer;

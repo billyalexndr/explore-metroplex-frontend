@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import PersistLogin from './components/Auth/PersistLogin';
 import RequiredAuth from './components/Auth/RequiredAuth';
 import { LoginPage } from './pages/Login/User';
@@ -20,52 +20,72 @@ import { EditUserPage } from './pages/Dashboard/Admin/EditUser';
 import { DataReservationPage } from './pages/Dashboard/Admin/DataReservation';
 import { NotFoundPage } from './pages/NotFound';
 import PasswordUpdatePage from './pages/Profile/components/PasswordUpdatePage';
+import NavAdmin from './pages/Dashboard/Admin/components/NavAdmin';
+import NavUser from './pages/Dashboard/User/components/NavUser';
+import Footer from './components/Dashboard/Footer';
+import useAuth from './hooks/useAuth';
 
 function App() {
+  const { auth } = useAuth();
+  const location = useLocation();
+  const hideNavPaths = ['/buy-ticket', '/add-destination', '/edit-destination'];
+
+  const shouldHideNav = hideNavPaths.some((path) =>
+    location.pathname.startsWith(path),
+  );
+
   return (
-    <main>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/login/admin" element={<LoginAdminPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+    <div>
+      {!shouldHideNav && (
+        <>
+          {auth?.role === 'ADMIN' && <NavAdmin />}
+          {auth?.role === 'USER' && <NavUser />}
+        </>
+      )}
+      <main className="content">
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login/admin" element={<LoginAdminPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-        <Route element={<PersistLogin />}>
-          <Route element={<RequiredAuth allowedRoles={['USER']} />}>
-            <Route path="/" element={<UserPage />} />
-            <Route path="/destination" element={<DestinationPage />} />
-            <Route
-              path="/detail-destination/:id"
-              element={<DetailPageUser />}
-            />
-            <Route path="/buy-ticket/:id" element={<BuyTicketPage />} />
-            <Route path="/reservation" element={<ReservationPage />} />
+          <Route element={<PersistLogin />}>
+            <Route element={<RequiredAuth allowedRoles={['USER']} />}>
+              <Route path="/" element={<UserPage />} />
+              <Route path="/destination" element={<DestinationPage />} />
+              <Route
+                path="/detail-destination/:id"
+                element={<DetailPageUser />}
+              />
+              <Route path="/reservation" element={<ReservationPage />} />
+            </Route>
+
+            <Route element={<RequiredAuth allowedRoles={['ADMIN']} />}>
+              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/data-user" element={<DataUserPage />} />
+              <Route
+                path="/data-reservation"
+                element={<DataReservationPage />}
+              />
+              <Route
+                path="/detail-destination-admin/:id"
+                element={<DetailPageAdmin />}
+              />
+            </Route>
+
+            <Route element={<RequiredAuth allowedRoles={['USER', 'ADMIN']} />}>
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route
+                path="/profile/update-password"
+                element={<PasswordUpdatePage />}
+              />
+            </Route>
           </Route>
 
-          <Route element={<RequiredAuth allowedRoles={['ADMIN']} />}>
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/add-destination" element={<AddPage />} />
-            <Route path="/edit-destination/:id" element={<EditPage />} />
-            <Route path="/data-user" element={<DataUserPage />} />
-            <Route path="/edit-user/:id" element={<EditUserPage />} />
-            <Route path="/data-reservation" element={<DataReservationPage />} />
-            <Route
-              path="/detail-destination-admin/:id"
-              element={<DetailPageAdmin />}
-            />
-          </Route>
-
-          <Route element={<RequiredAuth allowedRoles={['USER', 'ADMIN']} />}>
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route
-              path="/profile/update-password"
-              element={<PasswordUpdatePage />}
-            />
-          </Route>
-        </Route>
-
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </main>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+      {!shouldHideNav && <Footer />}
+    </div>
   );
 }
 

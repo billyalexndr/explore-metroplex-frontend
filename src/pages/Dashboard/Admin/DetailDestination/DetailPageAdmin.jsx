@@ -63,7 +63,6 @@ function DetailPageAdmin() {
 
   return (
     <div className="w-full">
-      <NavAdmin />
       <section className="p-6">
         {tour && (
           <>
@@ -84,7 +83,6 @@ function DetailPageAdmin() {
           </>
         )}
       </section>
-      <Footer />
     </div>
   );
 }

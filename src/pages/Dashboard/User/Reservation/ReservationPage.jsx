@@ -21,7 +21,9 @@ function ReservationPage() {
     const getReservations = async () => {
       try {
         const fetchedReservations = await api.getReservations({
-          axiosPrivate, signal: controller.signal, id,
+          axiosPrivate,
+          signal: controller.signal,
+          id,
         });
         if (isMounted) {
           setReservations(fetchedReservations);
@@ -46,9 +48,12 @@ function ReservationPage() {
     try {
       await api.cancelReservation({ axiosPrivate, id: reservationId });
       setReservations((prevReservations) =>
-        prevReservations.map((reservation) => (
-          reservation.id === reservationId ? { ...reservation, status: 'CANCELED' } : reservation
-      )));
+        prevReservations.map((reservation) =>
+          reservation.id === reservationId
+            ? { ...reservation, status: 'CANCELED' }
+            : reservation,
+        ),
+      );
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -61,8 +66,7 @@ function ReservationPage() {
 
   return (
     <div>
-      <NavUser />
-      <div className="tabs mb-6 flex space-x-4">
+      <div className="flex mb-6 space-x-4 tabs">
         {tabs.map((tab) => (
           <button
             type="button"
