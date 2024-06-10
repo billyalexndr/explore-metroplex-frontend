@@ -1,6 +1,24 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDebouncedCallback } from 'use-debounce';
 
 function SearchBar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const searchParams = new URLSearchParams(location.search);
+  const { pathname } = location;
+
+  const handleSearch = useDebouncedCallback((term) => {
+    const params = new URLSearchParams(location.search);
+    if (term) {
+      params.set('query', term);
+    } else {
+      params.delete('query');
+    }
+    navigate(`${pathname}?${params.toString()}`, { replace: true });
+  }, 300);
+
   return (
     <form className="w-full">
       <label
@@ -32,7 +50,8 @@ function SearchBar() {
           id="default-search"
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search Destination..."
-          required
+          onChange={(e) => handleSearch(e.target.value)}
+          defaultValue={searchParams.get('query') || ''}
         />
         <button
           type="submit"
