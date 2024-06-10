@@ -31,12 +31,14 @@ function DestUserCard({ id, photo, name, description, rating }) {
               : `${description.slice(0, 90)}${description.length > 90 ? '...' : ''}`}
           </p>
         </div>
-        <div className="flex items-center justify-between mt-2">
-          <span className="flex items-center gap-2 text-yellow-400">
-            <FaStar size={20} />
-            <p className="text-base text-black">{rating.toFixed(1)}</p>
-          </span>
-        </div>
+        {rating > 0.0 && (
+          <div className="flex items-center justify-between mt-2">
+            <span className="flex items-center gap-2 text-yellow-400">
+              <FaStar size={20} />
+              <p className="text-base text-black">{rating.toFixed(1)}</p>
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

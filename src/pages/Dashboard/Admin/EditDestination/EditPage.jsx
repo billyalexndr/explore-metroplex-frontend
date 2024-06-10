@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import CardEditDestination from '../components/CardEditDestination';
+import CardEditDestination from './components/CardEditDestination';
 import api from '../../../../utils/api';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 
@@ -40,7 +40,14 @@ function EditPage() {
   }, []);
 
   const onSubmitHandler = async ({
-    name, city, price, capacity, description, address, map, file,
+    name,
+    city,
+    price,
+    capacity,
+    description,
+    address,
+    map,
+    file,
   }) => {
     try {
       await api.updateTour({

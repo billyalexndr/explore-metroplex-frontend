@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 function CardEditDestination({ destination, onSubmit }) {
   const [name, setName] = useState('');
@@ -10,6 +12,8 @@ function CardEditDestination({ destination, onSubmit }) {
   const [address, setAddress] = useState('');
   const [map, setMap] = useState('');
   const [file, setFile] = useState();
+
+  const options = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
 
   useEffect(() => {
     if (destination) {
@@ -74,13 +78,16 @@ function CardEditDestination({ destination, onSubmit }) {
               >
                 City
               </label>
-              <input
-                type="text"
-                id="destination-city"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex-1 p-2.5"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
+              <div className="relative flex-1">
+                <Dropdown
+                  options={options}
+                  onChange={(option) => setCity(option.value)}
+                  value={city}
+                  placeholder="-- choose city --"
+                  controlClassName="w-full text-center"
+                  menuClassName="w-full text-center"
+                />
+              </div>
             </div>
           </div>
           <div className="flex flex-row w-full px-6 py-2">
@@ -178,7 +185,7 @@ function CardEditDestination({ destination, onSubmit }) {
                 Upload Image
               </label>
               <input
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none flex-1"
+                className="flex-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none"
                 id="file"
                 type="file"
                 onChange={fileSelected}

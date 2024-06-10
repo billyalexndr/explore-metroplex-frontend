@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Dropdown from 'react-dropdown';
-import { FaCaretDown } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import useInput from '../../../../../hooks/useInput';
 import 'react-dropdown/style.css';

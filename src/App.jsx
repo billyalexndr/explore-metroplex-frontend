@@ -10,7 +10,8 @@ import { AdminPage } from './pages/Dashboard/Admin';
 import { ProfilePage } from './pages/Profile';
 import { DestinationPage } from './pages/Dashboard/User/Destination';
 import { BuyTicketPage } from './pages/Dashboard/User/BuyTicket';
-import { DetailPage } from './pages/Dashboard/User/DetailDestination';
+import { DetailPageUser } from './pages/Dashboard/User/DetailDestination';
+import DetailPageAdmin from './pages/Dashboard/Admin/DetailDestination/DetailPageAdmin';
 import { ReservationPage } from './pages/Dashboard/User/Reservation';
 import { AddPage } from './pages/Dashboard/Admin/AddDestination';
 import { EditPage } from './pages/Dashboard/Admin/EditDestination';
@@ -32,7 +33,10 @@ function App() {
           <Route element={<RequiredAuth allowedRoles={['USER']} />}>
             <Route path="/" element={<UserPage />} />
             <Route path="/destination" element={<DestinationPage />} />
-            <Route path="/detail-destination/:id" element={<DetailPage />} />
+            <Route
+              path="/detail-destination/:id"
+              element={<DetailPageUser />}
+            />
             <Route path="/buy-ticket/:id" element={<BuyTicketPage />} />
             <Route path="/reservation" element={<ReservationPage />} />
           </Route>
@@ -44,11 +48,18 @@ function App() {
             <Route path="/data-user" element={<DataUserPage />} />
             <Route path="/edit-user/:id" element={<EditUserPage />} />
             <Route path="/data-reservation" element={<DataReservationPage />} />
+            <Route
+              path="/detail-destination-admin/:id"
+              element={<DetailPageAdmin />}
+            />
           </Route>
 
           <Route element={<RequiredAuth allowedRoles={['USER', 'ADMIN']} />}>
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/profile/update-password" element={<PasswordUpdatePage />} />
+            <Route
+              path="/profile/update-password"
+              element={<PasswordUpdatePage />}
+            />
           </Route>
         </Route>
 

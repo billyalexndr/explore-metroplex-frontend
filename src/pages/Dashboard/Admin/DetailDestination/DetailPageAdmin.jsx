@@ -3,12 +3,12 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import DetailDestination from './components/DetailDestination';
 import FeedbackInput from './components/FeedbackInput';
 import FeedbackList from './components/FeedbackList';
-import NavUser from '../components/NavUser';
+import NavAdmin from '../components/NavAdmin';
 import Footer from '../../../../components/Dashboard/Footer';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
 
-function DetailPage() {
+function DetailPageAdmin() {
   const axiosPrivate = useAxiosPrivate();
   const { id } = useParams();
   const [tour, setTour] = useState();
@@ -51,7 +51,10 @@ function DetailPage() {
         text: message,
         rate: rating,
       });
-      const updatedTour = await api.getTourById({ signal: new AbortController().signal, id });
+      const updatedTour = await api.getTourById({
+        signal: new AbortController().signal,
+        id,
+      });
       setTour(updatedTour);
     } catch (error) {
       alert(error.response.data.message);
@@ -60,7 +63,7 @@ function DetailPage() {
 
   return (
     <div className="w-full">
-      <NavUser />
+      <NavAdmin />
       <section className="p-6">
         {tour && (
           <>
@@ -76,7 +79,7 @@ function DetailPage() {
               price={tour.price}
               map={tour.map}
             />
-            <FeedbackInput onSubmit={onSubmitHandler} />
+            {/* <FeedbackInput onSubmit={onSubmitHandler} /> */}
             <FeedbackList feedbacks={tour.feedbacks} />
           </>
         )}
@@ -86,4 +89,4 @@ function DetailPage() {
   );
 }
 
-export default DetailPage;
+export default DetailPageAdmin;

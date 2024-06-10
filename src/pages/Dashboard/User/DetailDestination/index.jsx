@@ -1,1 +1,1 @@
-export { default as DetailPage } from './DetailPage';
+export { default as DetailPageUser } from './DetailPageUser';

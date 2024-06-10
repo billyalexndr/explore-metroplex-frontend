@@ -18,7 +18,7 @@ function DestAdminCard({ id, photo, name, description, rating, onDelete }) {
       </a>
       <div className="flex flex-col justify-between h-40 p-5">
         <div>
-          <Link to={`/detail-destination/${id}`}>
+          <Link to={`/detail-destination-admin/${id}`}>
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 ">
               {isNameExpanded
                 ? name
@@ -33,8 +33,12 @@ function DestAdminCard({ id, photo, name, description, rating, onDelete }) {
         </div>
         <div className="flex items-center justify-between mt-2">
           <span className="flex items-center gap-2 text-yellow-400">
-            <FaStar size={20} />
-            <p className="text-base text-black">{rating.toFixed(1)}</p>
+            {rating > 0.0 && (
+              <div className="flex">
+                <FaStar size={20} />
+                <p className="text-base text-black">{rating.toFixed(1)}</p>
+              </div>
+            )}
           </span>
           <div className="flex gap-2">
             <Link
