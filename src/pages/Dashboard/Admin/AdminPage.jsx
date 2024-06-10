@@ -17,13 +17,19 @@ function AdminPage() {
   const location = useLocation();
   const effectRun = useRef(false);
 
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get('query') || '';
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
 
     const getTours = async () => {
       try {
-        const tours = await api.getAllTour({ signal: controller.signal });
+        const tours = await api.getAllTour({
+          signal: controller.signal,
+          name: query,
+        });
         if (isMounted) {
           setTours(tours);
         }
@@ -41,7 +47,7 @@ function AdminPage() {
       controller.abort();
       effectRun.current = true;
     };
-  }, []);
+  }, [location.search, navigate, location]);
 
   const handleDeleteTour = async ({ id }) => {
     if (window.confirm('Are you sure you want to delete tour?')) {

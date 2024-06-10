@@ -4,6 +4,7 @@ import NavUser from './components/NavUser';
 import Footer from '../../../components/Dashboard/Footer';
 import SearchBar from '../../../components/Dashboard/SearchBar';
 import DestUserCard from './Destination/components/DestUserCard';
+import StoryCard from './components/StoryCard';
 import api from '../../../utils/api';
 
 function UserPage() {
@@ -102,55 +103,29 @@ function UserPage() {
       <div className="flex flex-col items-center justify-center mx-10 text-3xl font-bold mt-7">
         <h1 className="text-[#006769]">Stories of Explore Metroplex</h1>
         <div className="flex gap-4">
-          <div
-            href="#"
-            className="block mt-4 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-          >
-            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Taman Mini Indonesia
-            </h5>
-            <div className="flex items-center gap-5 mb-2">
-              <img
-                className="w-10 h-10 rounded-full"
-                src="/images/ronaldo.jpg"
-                alt="Rounded avatar"
-              />
-              <p className="text-xl font-bold">Ronaldo</p>
-            </div>
-            <p className="font-normal text-base text-gray-700 dark:text-gray-400">
-              TMII is a cultural delight! Each pavilion showcases Indonesia&apos;s
-              diverse heritage vividly. From traditional houses to lively
-              performances, it&apos;s an immersive journey through Indonesia.
-            </p>
-          </div>
-          <div
-            href="#"
-            className="block mt-4 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-          >
-            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Taman Mini Indonesia
-            </h5>
-            <div className="flex items-center gap-5 mb-2">
-              <img
-                className="w-10 h-10 rounded-full"
-                src="/images/ronaldo.jpg"
-                alt="Rounded avatar"
-              />
-              <p className="text-xl font-bold">Ronaldo</p>
-            </div>
-            <p className="font-normal text-base text-gray-700 dark:text-gray-400">
-              TMII is a cultural delight! Each pavilion showcases Indonesia&apos;s
-              diverse heritage vividly. From traditional houses to lively
-              performances, it&apos;s an immersive journey through Indonesia.
-            </p>
-          </div>
+          {tours
+            .filter((tour) => tour.feedbacks.length > 0)
+            .slice(0, 2)
+            .map((tour) => {
+              const feedback = tour.feedbacks[0];
+              return (
+                <StoryCard
+                  key={tour.id}
+                  title={tour.name}
+                  profilePicture={feedback.user.profilePicture}
+                  name={feedback.user.name}
+                  description={feedback.text}
+                />
+              );
+            })
+          }
         </div>
-        <button
-          type="button"
+        <Link
+          to="/destination"
           className="text-white mt-4 bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
         >
           View All
-        </button>
+        </Link>
       </div>
       <div className="mt-7">
         <Footer />
