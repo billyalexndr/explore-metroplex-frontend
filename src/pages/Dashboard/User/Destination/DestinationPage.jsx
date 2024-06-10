@@ -102,7 +102,7 @@ function DestinationPage() {
               />
             </svg>
           </button> */}
-          <div
+          {/* <div
             id="dropdown"
             className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
           >
@@ -143,26 +143,18 @@ function DestinationPage() {
                 </a>
               </li>
             </ul>
-          </div>
-          {/* <Link
-            to="/add-destination"
-            type="button"
-            className="w-1/3 flex items-center justify-center text-white mr-10 bg-[#40A578] hover:bg-[#006769] focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-          >
-            <p className="flex items-center justify-center">
-              Add Destination
-              <IoAdd size={25} className="ml-1" />
-            </p>
-          </Link> */}
+          </div> */}
         </div>
-        <div className="flex flex-col items-center justify-center text-3xl font-bold mt-7">
-          <h1 className="text-[#006769]">Where Do You Want to Explore?</h1>
-          <div className="flex items-center justify-center gap-4 mt-4">
-            {displayTours}
-          </div>
-          <div className="flex items-center justify-center w-full mt-7">
-            <Pagination pageCount={pageCount} changePage={changePage} />
-          </div>
+        <div className="flex items-center justify-center mt-7">
+          <h1 className="text-[#006769] text-3xl font-bold">
+            Where Do You Want to Explore?
+          </h1>
+        </div>
+        <div className="flex items-center justify-center gap-4 mt-7">
+          {displayTours}
+        </div>
+        <div className="flex items-center justify-center w-full mt-7">
+          <Pagination pageCount={pageCount} changePage={changePage} />
         </div>
       </div>
       <div className="mt-7">
