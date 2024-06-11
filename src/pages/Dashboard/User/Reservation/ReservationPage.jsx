@@ -62,12 +62,12 @@ function ReservationPage() {
   return (
     <div>
       <NavUser />
-      <div className="tabs mb-6 flex space-x-4">
+      <div className="tabs my-6 flex space-x-4 justify-center items-center">
         {tabs.map((tab) => (
           <button
             type="button"
             key={tab}
-            className={`px-4 py-2 rounded ${activeTab === tab ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+            className={`px-4 py-2 rounded-full ${activeTab === tab ? 'bg-green-800 text-white' : 'border-2 border-green-700 text-green-700'}`}
             onClick={() => setActiveTab(tab)}
           >
             {tab}
