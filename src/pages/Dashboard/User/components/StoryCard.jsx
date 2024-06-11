@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function StoryCard({ title, profilePicture, name, description }) {
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+
   return (
     <div
       href="#"
-      className="block mt-4 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      className="block mt-4 w-[300px] h-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
     >
       <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
         {title}
@@ -18,8 +20,10 @@ function StoryCard({ title, profilePicture, name, description }) {
         />
         <p className="text-xl font-bold">{name}</p>
       </div>
-      <p className="font-normal text-base text-gray-700 dark:text-gray-400">
-        {description}
+      <p className="mt-3 text-base font-normal text-justify text-gray-700 dark:text-gray-400">
+        {isDescriptionExpanded
+          ? description
+          : `${description.slice(0, 155)}${description.length > 155 ? '...' : ''}`}
       </p>
     </div>
   );

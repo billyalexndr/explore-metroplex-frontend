@@ -88,7 +88,6 @@ function AdminPage() {
 
   return (
     <div>
-      <NavAdmin />
       <div className="mx-10">
         <div className="flex mx-0 mt-7 w-full items-center justify-center gap-[550px]">
           <SearchBar />

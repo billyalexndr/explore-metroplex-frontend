@@ -66,7 +66,6 @@ function ReservationPage() {
 
   return (
     <div>
-      <NavUser />
       <div className="flex items-center justify-center my-6 space-x-4 tabs">
         {tabs.map((tab) => (
           <button

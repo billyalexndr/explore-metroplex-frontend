@@ -42,25 +42,6 @@ function DetailPageAdmin() {
     };
   }, []);
 
-  const onSubmitHandler = async ({ message, rating }) => {
-    try {
-      await api.createFeedback({
-        axiosPrivate,
-        signal: new AbortController().signal,
-        id,
-        text: message,
-        rate: rating,
-      });
-      const updatedTour = await api.getTourById({
-        signal: new AbortController().signal,
-        id,
-      });
-      setTour(updatedTour);
-    } catch (error) {
-      alert(error.response.data.message);
-    }
-  };
-
   return (
     <div className="w-full">
       <section className="p-6">
@@ -78,7 +59,6 @@ function DetailPageAdmin() {
               price={tour.price}
               map={tour.map}
             />
-            {/* <FeedbackInput onSubmit={onSubmitHandler} /> */}
             <FeedbackList feedbacks={tour.feedbacks} />
           </>
         )}

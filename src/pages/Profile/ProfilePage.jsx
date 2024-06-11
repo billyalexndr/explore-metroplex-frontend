@@ -3,8 +3,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import useLogOut from '../../hooks/useLogOut';
-import NavUser from '../Dashboard/User/components/NavUser';
-import Footer from '../../components/Dashboard/Footer';
 
 function ProfilePage() {
   const axiosPrivate = useAxiosPrivate();
@@ -114,7 +112,6 @@ function ProfilePage() {
 
   return (
     <div className="w-full">
-      <NavUser />
       <div class="flex m-9 justify-center items-center">
         {profile && (
           <div class="flex flex-col p-9 w-1/2 bg-white border border-gray-200 rounded-lg shadow">
@@ -224,7 +221,7 @@ function ProfilePage() {
                   onSubmit={handleFormSubmit}
                 >
                   {errMsg && (
-                    <div className="text-red-500 text-sm font-bold mt-2">
+                    <div className="mt-2 text-sm font-bold text-red-500">
                       {errMsg}
                     </div>
                   )}
@@ -300,7 +297,6 @@ function ProfilePage() {
           </div>
         )}
       </div>
-      <Footer />
     </div>
   );
 }

@@ -19,7 +19,7 @@ import { DataUserPage } from './pages/Dashboard/Admin/DataUser';
 import { EditUserPage } from './pages/Dashboard/Admin/EditUser';
 import { DataReservationPage } from './pages/Dashboard/Admin/DataReservation';
 import { NotFoundPage } from './pages/NotFound';
-import PasswordUpdatePage from './pages/Profile/components/PasswordUpdatePage';
+import PasswordUpdatePage from './pages/Profile/UpdatePassword/PasswordUpdatePage';
 import NavAdmin from './pages/Dashboard/Admin/components/NavAdmin';
 import NavUser from './pages/Dashboard/User/components/NavUser';
 import Footer from './components/Dashboard/Footer';
@@ -28,7 +28,14 @@ import useAuth from './hooks/useAuth';
 function App() {
   const { auth } = useAuth();
   const location = useLocation();
-  const hideNavPaths = ['/buy-ticket', '/add-destination', '/edit-destination'];
+  const hideNavPaths = [
+    '/buy-ticket',
+    '/add-destination',
+    '/edit-destination',
+    '/login',
+    '/login/admin',
+    '/register',
+  ];
 
   const shouldHideNav = hideNavPaths.some((path) =>
     location.pathname.startsWith(path),
@@ -56,12 +63,15 @@ function App() {
                 path="/detail-destination/:id"
                 element={<DetailPageUser />}
               />
+              <Route path="/buy-ticket/:id" element={<BuyTicketPage />} />
               <Route path="/reservation" element={<ReservationPage />} />
             </Route>
 
             <Route element={<RequiredAuth allowedRoles={['ADMIN']} />}>
               <Route path="/admin" element={<AdminPage />} />
               <Route path="/data-user" element={<DataUserPage />} />
+              <Route path="/add-destination" element={<AddPage />} />
+              <Route path="/edit-destination/:id" element={<EditPage />} />
               <Route
                 path="/data-reservation"
                 element={<DataReservationPage />}

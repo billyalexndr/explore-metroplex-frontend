@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 function ReservationList({ reservations, activeTab, onCancel }) {
   return (
     <div className="relative p-6 overflow-x-auto">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-gray-50 shadow-md">
-        <thead className="text-sm text-center text-gray-700 uppercase bg-green-700 text-white dark:bg-gray-700 dark:text-gray-400">
+      <table className="w-full text-sm text-left text-gray-500 shadow-md rtl:text-right dark:text-gray-400 border-gray-50">
+        <thead className="text-sm text-center text-white uppercase bg-green-700 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
               No
@@ -54,7 +54,9 @@ function ReservationList({ reservations, activeTab, onCancel }) {
                 <td className="px-6 py-4">{reservation.phone}</td>
                 <td className="px-6 py-4">{reservation.email}</td>
                 <td className="px-6 py-4 text-center">{reservation.ticket}</td>
-                <td className="px-6 py-4 text-center">{reservation.subtotal}</td>
+                <td className="px-6 py-4 text-center">
+                  {reservation.subtotal}
+                </td>
                 <td className="px-6 py-4 text-center">
                   {new Date(reservation.reservedAt).toLocaleString('en-US', {
                     year: 'numeric',
@@ -67,7 +69,7 @@ function ReservationList({ reservations, activeTab, onCancel }) {
                   <td className="px-6 py-4">
                     <button
                       type="button"
-                      className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                      className="px-4 py-2 mt-4 text-white bg-red-500 rounded hover:bg-red-600"
                       onClick={() => onCancel(reservation.id)}
                     >
                       Cancel

@@ -47,13 +47,10 @@ function UserPage() {
     <div>
       <div className="relative">
         <img className="w-full h-screen" src="/images/banner.jpg" alt="" />
-        <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full gap-10">
+        <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full gap-10 text-[#E4FCAA]">
           <h1 className="text-5xl font-bold">
             Uncover Adventures, One Metroplex at a Time!
           </h1>
-          <div className="w-full max-w-lg px-4">
-            <SearchBar />
-          </div>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center mx-10 text-3xl font-bold mt-7">

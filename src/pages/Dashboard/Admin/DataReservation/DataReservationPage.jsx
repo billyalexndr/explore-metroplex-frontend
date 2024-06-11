@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import NavAdmin from '../components/NavAdmin';
 import TableReservation from '../components/TableReservation';
-import Footer from '../../../../components/Dashboard/Footer';
 import SearchBar from '../../../../components/Dashboard/SearchBar';
 import Pagination from '../../../../components/Dashboard/Pagination';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
@@ -50,13 +48,15 @@ function DataUserPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-center">
-        <div className="w-3/4">
+      <div>
+        <div className="flex flex-col items-center justify-center mx-10">
           <div className="flex flex-col mt-7 font-bold text-[#006769] justify-center items-center">
             <h1>TABLE DATA RESERVATION</h1>
             <h1>EXPLORE METROPLEX</h1>
           </div>
-          <SearchBar />
+          <div className="flex items-center justify-center w-2/4 mt-7">
+            <SearchBar />
+          </div>
           <div className="mt-7">
             <TableReservation reservations={reservations} />
           </div>

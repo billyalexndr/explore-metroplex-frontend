@@ -1,4 +1,3 @@
-// PasswordUpdatePage.js
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../../../utils/api';
@@ -32,16 +31,15 @@ function PasswordUpdatePage() {
 
   return (
     <div className="w-full">
-      <NavUser />
-      <div className="flex justify-center items-center m-9 bg-white">
-        <div className="relative flex items-start px-10 py-14 rounded-lg border-2 border-green-700 shadow-md w-full max-w-lg">
-          <form className="flex flex-col space-y-3 w-full">
+      <div className="flex items-center justify-center bg-white m-9">
+        <div className="relative flex items-start w-full max-w-lg px-10 border-2 border-green-700 rounded-lg shadow-md py-14">
+          <form className="flex flex-col w-full space-y-3">
             {errMsg && (
-              <div className="text-red-500 text-sm font-bold mt-2">
+              <div className="mt-2 text-sm font-bold text-red-500">
                 {errMsg}
               </div>
             )}
-            <h2 className="text-center text-lg font-bold text-green-700">
+            <h2 className="text-lg font-bold text-center text-green-700">
               Create a New Password
             </h2>
             <div className="relative">
@@ -90,7 +88,7 @@ function PasswordUpdatePage() {
               </button>
               <button
                 type="button"
-                className="px-4 py-2 bg-green-700 text-white rounded"
+                className="px-4 py-2 text-white bg-green-700 rounded"
                 onClick={handlePasswordUpdate}
               >
                 Save
@@ -99,7 +97,6 @@ function PasswordUpdatePage() {
           </form>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

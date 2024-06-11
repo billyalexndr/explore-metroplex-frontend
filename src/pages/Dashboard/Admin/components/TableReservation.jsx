@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TableReservation({ reservations }) {
+  console.log(reservations);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+        <thead className="text-sm text-center text-white uppercase bg-green-700 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
               No
@@ -42,7 +43,10 @@ function TableReservation({ reservations }) {
         <tbody>
           {reservations && reservations.length > 0 ? (
             reservations.map((reservation, index) => (
-              <tr key={reservation.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <tr
+                key={reservation.id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
                 <td className="px-6 py-4">{index + 1}</td>
                 <td className="px-6 py-4">{reservation.tour.name}</td>
                 <td className="px-6 py-4">{reservation.user.name}</td>
@@ -51,13 +55,14 @@ function TableReservation({ reservations }) {
                 <td className="px-6 py-4">{reservation.email}</td>
                 <td className="px-6 py-4">{reservation.ticket}</td>
                 <td className="px-6 py-4">{reservation.subtotal}</td>
-                <td className="px-6 py-4">{new Date(reservation.reservedAt).toLocaleString('en-US', {
+                <td className="px-6 py-4">
+                  {new Date(reservation.reservedAt).toLocaleString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })}
                 </td>
-                <td className="px-6 py-4">{reservation.status}</td>
+                <td className="px-6 py-4 text-center">{reservation.status}</td>
               </tr>
             ))
           ) : (
