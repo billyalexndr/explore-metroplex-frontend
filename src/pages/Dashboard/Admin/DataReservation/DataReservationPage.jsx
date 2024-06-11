@@ -15,6 +15,9 @@ function DataUserPage() {
   const location = useLocation();
   const effectRun = useRef(false);
 
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get('query') || '';
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -24,6 +27,7 @@ function DataUserPage() {
         const reservations = await api.getReservations({
           axiosPrivate,
           signal: controller.signal,
+          query,
         });
         if (isMounted) {
           setReservations(reservations);
@@ -42,7 +46,7 @@ function DataUserPage() {
       controller.abort();
       effectRun.current = true;
     };
-  }, []);
+  }, [location.search, navigate, location]);
 
   return (
     <div>
@@ -52,13 +56,13 @@ function DataUserPage() {
             <h1>TABLE DATA RESERVATION</h1>
             <h1>EXPLORE METROPLEX</h1>
           </div>
-          {/* <SearchBar /> */}
+          <SearchBar />
           <div className="mt-7">
             <TableReservation reservations={reservations} />
           </div>
-          {/* <div className="flex items-center justify-center w-full mt-7">
+          <div className="flex items-center justify-center w-full mt-7">
             <Pagination />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

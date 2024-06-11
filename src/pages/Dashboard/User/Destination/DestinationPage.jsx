@@ -20,13 +20,19 @@ function DestinationPage() {
 
   const options = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
 
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get('query') || '';
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
 
     const getTours = async () => {
       try {
-        const tours = await api.getAllTour({ signal: controller.signal });
+        const tours = await api.getAllTour({
+          signal: controller.signal,
+          name: query,
+        });
         if (isMounted) {
           setTours(tours);
         }
@@ -44,7 +50,7 @@ function DestinationPage() {
       controller.abort();
       effectRun.current = true;
     };
-  }, []);
+  }, [location.search, navigate, location]);
 
   const displayTours = tours
     .slice(pagesVisited, pagesVisited + toursPerPage)

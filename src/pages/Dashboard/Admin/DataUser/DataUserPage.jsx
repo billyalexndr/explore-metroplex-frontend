@@ -17,6 +17,9 @@ function DataUserPage() {
   const location = useLocation();
   const effectRun = useRef(false);
 
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get('query') || '';
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -26,6 +29,7 @@ function DataUserPage() {
         const users = await api.getAllUser({
           axiosPrivate,
           signal: controller.signal,
+          query,
         });
         if (isMounted) {
           setUsers(users);
@@ -44,7 +48,7 @@ function DataUserPage() {
       controller.abort();
       effectRun.current = true;
     };
-  }, []);
+  }, [location.search, navigate, location]);
 
   const handleDeleteUser = async ({ id }) => {
     if (window.confirm('Are you sure you want to delete account?')) {
@@ -69,7 +73,7 @@ function DataUserPage() {
             <h1>TABLE DATA USER</h1>
             <h1>EXPLORE METROPLEX</h1>
           </div>
-          {/* <SearchBar /> */}
+          <SearchBar />
           <div className="mt-7">
             <TableUser
               users={users}
@@ -77,9 +81,9 @@ function DataUserPage() {
               loggedInUserId={auth.user.id}
             />
           </div>
-          {/* <div className="flex items-center justify-center w-full mt-7">
+          <div className="flex items-center justify-center w-full mt-7">
             <Pagination />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

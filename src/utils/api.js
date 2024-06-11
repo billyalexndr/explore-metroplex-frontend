@@ -120,8 +120,13 @@ const api = (() => {
     return responseJson;
   }
 
-  async function getAllUser({ axiosPrivate, signal }) {
+  async function getAllUser({ axiosPrivate, signal, query = '' }) {
+    const params = {};
+
+    if (query) params.query = query;
+
     const response = await axiosPrivate.get('/users', {
+      params,
       signal,
     });
 
@@ -196,9 +201,10 @@ const api = (() => {
     return responseJson;
   }
 
-  async function getAllTour({ signal, city = '', page = 1, limit = 10 }) {
+  async function getAllTour({ signal, name = '', city = '', page = 1, limit = 10 }) {
     const params = {};
 
+    if (name) params.name = name;
     if (city) params.city = city;
     if (page) params.page = page;
     if (limit) params.limit = limit;
@@ -406,8 +412,13 @@ const api = (() => {
     return responseJson;
   }
 
-  async function getReservations({ axiosPrivate, signal }) {
+  async function getReservations({ axiosPrivate, signal, query = '' }) {
+    const params = {};
+
+    if (query) params.query = query;
+
     const response = await axiosPrivate.get('/reservations', {
+      params,
       signal,
     });
 

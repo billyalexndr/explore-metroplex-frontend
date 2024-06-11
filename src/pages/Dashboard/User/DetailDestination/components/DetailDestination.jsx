@@ -112,15 +112,16 @@ function DetailDestination({
                 clipRule="evenodd"
               />
             </svg>
-            <a
-              href="https://www.google.com/maps/@?api=1&map_action=map&center=37.7749,-122.4194&zoom=12"
-              target="_blank"
-            >
-              <img
-                src="https://www.google.com/maps/vt/data=37.7749,-122.4194,12"
-                alt="Map"
-              />
-            </a>
+            <iframe
+              src={map}
+              width="400"
+              height="250"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Google Map"
+            />
           </div>
         </div>
       </div>
