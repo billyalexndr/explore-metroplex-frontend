@@ -44,8 +44,8 @@ function UserPage() {
       <NavUser />
       <div className="relative">
         <img
-          className="w-full h-screen rounded-t-lg"
-          src="/images/banner.png"
+          className="w-full h-screen"
+          src="/images/banner.jpg"
           alt=""
         />
         <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full gap-10">
@@ -81,7 +81,7 @@ function UserPage() {
       </div>
       <div className="relative mt-7">
         <img
-          className="w-full h-[450px] rounded-t-lg"
+          className="w-full h-[450px]"
           src="/images/about.png"
           alt=""
         />
