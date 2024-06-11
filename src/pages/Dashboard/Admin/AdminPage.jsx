@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { IoAdd } from 'react-icons/io5';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Badge from '../../../components/Dashboard/Badge';
-import Footer from '../../../components/Dashboard/Footer';
 import Pagination from '../../../components/Dashboard/Pagination';
 import SearchBar from '../../../components/Dashboard/SearchBar';
 import NavAdmin from './components/NavAdmin';
@@ -83,6 +82,7 @@ function AdminPage() {
 
   return (
     <div>
+      <NavAdmin />
       <div className="mx-10">
         <div className="flex mx-0 mt-7 w-full items-center justify-center gap-[550px]">
           <SearchBar />

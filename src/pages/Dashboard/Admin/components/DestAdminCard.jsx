@@ -50,7 +50,7 @@ function DestAdminCard({ id, photo, name, description, rating, onDelete }) {
             <button
               type="button"
               className="font-medium text-red-600 hover:underline"
-              onClick={() => onDelete(id)}
+              onClick={() => onDelete({ id })}
             >
               <FaRegTrashAlt />
             </button>
