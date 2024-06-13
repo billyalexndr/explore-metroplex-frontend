@@ -30,14 +30,14 @@ function PasswordUpdatePage() {
   return (
     <div className="w-full">
       <div className="flex items-center justify-center bg-white m-9">
-        <div className="relative flex items-start w-full max-w-lg px-10 border-2 border-green-700 rounded-lg shadow-md py-14">
+        <div className="relative flex items-start w-full max-w-lg px-10 border-2 border-[#006769] rounded-lg shadow-md py-14">
           <form className="flex flex-col w-full space-y-3">
             {errMsg && (
               <div className="mt-2 text-sm font-bold text-red-500">
                 {errMsg}
               </div>
             )}
-            <h2 className="text-lg font-bold text-center text-green-700">
+            <h2 className="text-lg font-bold text-center text-[#006769]">
               Create a New Password
             </h2>
             <div className="relative">
@@ -47,12 +47,12 @@ function PasswordUpdatePage() {
                 name="currentPassword"
                 value={currentPassword}
                 onChange={onCurrentPasswordChange}
-                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-green-700 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-[#006769] appearance-none focus:outline-none focus:ring-0 focus:border-[#006769] peer"
                 placeholder=" "
               />
               <label
                 htmlfor="currentPassword"
-                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#006769] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
               >
                 Current Password
               </label>
@@ -64,12 +64,12 @@ function PasswordUpdatePage() {
                 name="newPassword"
                 value={newPassword}
                 onChange={onWewPasswordChange}
-                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-green-700 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-[#006769] appearance-none focus:outline-none focus:ring-0 focus:border-[#006769] peer"
                 placeholder=" "
               />
               <label
                 htmlfor="newPassword"
-                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#006769] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
               >
                 New Password
               </label>
@@ -77,7 +77,7 @@ function PasswordUpdatePage() {
             <div className="flex justify-center space-x-3">
               <button
                 type="button"
-                className="px-4 py-2 bg-gray-200 rounded"
+                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
                 onClick={() =>
                   navigate('/profile', { state: { from: location } })
                 }
@@ -86,7 +86,7 @@ function PasswordUpdatePage() {
               </button>
               <button
                 type="button"
-                className="px-4 py-2 text-white bg-green-700 rounded"
+                className="px-4 py-2 text-white bg-[#006769] hover:bg-[#053a3b] rounded"
                 onClick={handlePasswordUpdate}
               >
                 Save

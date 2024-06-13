@@ -48,14 +48,14 @@ function SearchBar() {
         <input
           type="search"
           id="default-search"
-          className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-green-500 focus:border-green-500"
+          className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-[#006769] focus:border-[#006769]"
           placeholder="Search Destination..."
           onChange={(e) => handleSearch(e.target.value)}
           defaultValue={searchParams.get('query') || ''}
         />
         <button
           type="submit"
-          className="text-white absolute end-2.5 bottom-2.5 bg-[#40A578] hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2"
+          className="text-white absolute end-2.5 bottom-2.5 bg-[#006769] hover:bg-[#053a3b] font-medium rounded-lg text-sm px-4 py-2"
         >
           Search
         </button>
