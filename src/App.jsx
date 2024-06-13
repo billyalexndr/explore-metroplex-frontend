@@ -72,6 +72,7 @@ function App() {
               <Route path="/data-user" element={<DataUserPage />} />
               <Route path="/add-destination" element={<AddPage />} />
               <Route path="/edit-destination/:id" element={<EditPage />} />
+              <Route path="/edit-user/:id" element={<EditUserPage />} />
               <Route
                 path="/data-reservation"
                 element={<DataReservationPage />}
