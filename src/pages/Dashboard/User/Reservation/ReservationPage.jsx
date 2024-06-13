@@ -3,7 +3,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
 import ReservationList from './components/ReservationList';
-import NavUser from '../components/NavUser';
 
 function ReservationPage() {
   const axiosPrivate = useAxiosPrivate();
@@ -48,12 +47,9 @@ function ReservationPage() {
     try {
       await api.cancelReservation({ axiosPrivate, id: reservationId });
       setReservations((prevReservations) =>
-        prevReservations.map((reservation) =>
-          reservation.id === reservationId
-            ? { ...reservation, status: 'CANCELED' }
-            : reservation,
-        ),
-      );
+        prevReservations.map((reservation) => (
+          reservation.id === reservationId ? { ...reservation, status: 'CANCELED' } : reservation
+      )));
     } catch (error) {
       alert(error.response.data.message);
     }

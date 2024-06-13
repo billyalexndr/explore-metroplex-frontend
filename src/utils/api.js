@@ -201,7 +201,7 @@ const api = (() => {
     return responseJson;
   }
 
-  async function getAllTour({ signal, name = '', city = '', page = 1, limit = 10 }) {
+  async function getAllTour({ signal, name = '', city = '', page = 1, limit = 100 }) {
     const params = {};
 
     if (name) params.name = name;

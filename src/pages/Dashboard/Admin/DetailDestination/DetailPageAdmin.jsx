@@ -1,15 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import DetailDestination from './components/DetailDestination';
-import FeedbackInput from './components/FeedbackInput';
 import FeedbackList from './components/FeedbackList';
-import NavAdmin from '../components/NavAdmin';
-import Footer from '../../../../components/Dashboard/Footer';
-import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
 
 function DetailPageAdmin() {
-  const axiosPrivate = useAxiosPrivate();
   const { id } = useParams();
   const [tour, setTour] = useState();
   const navigate = useNavigate();
@@ -48,7 +43,6 @@ function DetailPageAdmin() {
         {tour && (
           <>
             <DetailDestination
-              id={tour.id}
               name={tour.name}
               address={tour.address}
               photo={tour.photo}

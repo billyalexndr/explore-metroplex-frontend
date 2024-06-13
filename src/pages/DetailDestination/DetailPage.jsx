@@ -1,5 +1,5 @@
 import React from 'react';
-import DetailDestination from './components/detailDestination';
+import DetailDestination from './components/DetailDestination';
 import FeedbackInput from './components/FeedbackInput';
 import FeedbackList from './components/FeedbackList';
 
@@ -10,7 +10,7 @@ function DetailPage() {
       <FeedbackInput />
       <FeedbackList />
     </section>
-  )
+  );
 }
 
-export default DetailPage
+export default DetailPage;

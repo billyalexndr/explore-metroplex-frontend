@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Badge from '../../../components/Dashboard/Badge';
 import Pagination from '../../../components/Dashboard/Pagination';
 import SearchBar from '../../../components/Dashboard/SearchBar';
-import NavAdmin from './components/NavAdmin';
 import DestAdminCard from './components/DestAdminCard';
 import api from '../../../utils/api';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';

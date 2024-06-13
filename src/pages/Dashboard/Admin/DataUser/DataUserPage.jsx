@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import NavAdmin from '../components/NavAdmin';
 import TableUser from '../components/TableUser';
-import Footer from '../../../../components/Dashboard/Footer';
 import SearchBar from '../../../../components/Dashboard/SearchBar';
 import Pagination from '../../../../components/Dashboard/Pagination';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
