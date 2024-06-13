@@ -3,8 +3,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import DetailDestination from './components/DetailDestination';
 import FeedbackInput from './components/FeedbackInput';
 import FeedbackList from './components/FeedbackList';
-import NavUser from '../components/NavUser';
-import Footer from '../../../../components/Dashboard/Footer';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
 

@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import NavUser from './components/NavUser';
-import Footer from '../../../components/Dashboard/Footer';
-import SearchBar from '../../../components/Dashboard/SearchBar';
 import DestUserCard from './Destination/components/DestUserCard';
 import StoryCard from './components/StoryCard';
 import api from '../../../utils/api';
@@ -97,7 +94,7 @@ function UserPage() {
         <div className="flex gap-4">
           {tours
             .filter((tour) => tour.feedbacks.length > 0)
-            .slice(0, 2)
+            .slice(0, 4)
             .map((tour) => {
               const feedback = tour.feedbacks[0];
               return (
