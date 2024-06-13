@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TableReservation({ reservations }) {
-  console.log(reservations);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-center text-gray-500 rtl:text-right dark:text-gray-400">
@@ -68,7 +67,7 @@ function TableReservation({ reservations }) {
           ) : (
             <tr>
               <td colSpan="5" className="px-6 py-4 text-center">
-                No users found
+                No tours found
               </td>
             </tr>
           )}

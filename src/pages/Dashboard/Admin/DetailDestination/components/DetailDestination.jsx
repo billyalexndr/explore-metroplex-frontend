@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function DetailDestination({
-  id,
   name,
   address,
   photo,
@@ -22,16 +20,6 @@ function DetailDestination({
             {name}
           </h1>
           <p className="text-lg mt-2.5"> {address}</p>
-        </div>
-        <div className="text-center">
-          {/* <Link
-            
-            to={`/buy-ticket/${id}`}
-            type="button"
-            className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-bold rounded-full text-sm px-5 py-2.5"
-          >
-            Buy Ticket
-          </Link> */}
         </div>
       </div>
       <div className="flex md:flex-row">
@@ -130,7 +118,6 @@ function DetailDestination({
 }
 
 DetailDestination.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,

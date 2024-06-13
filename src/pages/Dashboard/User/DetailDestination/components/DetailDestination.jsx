@@ -14,7 +14,6 @@ function DetailDestination({
   price,
   map,
 }) {
-  console.log(map);
   return (
     <>
       <div className="flex justify-between p-3 mb-3 md:flex-row">

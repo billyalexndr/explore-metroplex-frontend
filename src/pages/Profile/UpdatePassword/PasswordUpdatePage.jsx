@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../../../utils/api';
 import useInput from '../../../hooks/useInput';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
-import NavUser from '../../Dashboard/User/components/NavUser';
-import Footer from '../../../components/Dashboard/Footer';
 
 function PasswordUpdatePage() {
   const axiosPrivate = useAxiosPrivate();

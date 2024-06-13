@@ -11,7 +11,7 @@ import { ProfilePage } from './pages/Profile';
 import { DestinationPage } from './pages/Dashboard/User/Destination';
 import { BuyTicketPage } from './pages/Dashboard/User/BuyTicket';
 import { DetailPageUser } from './pages/Dashboard/User/DetailDestination';
-import DetailPageAdmin from './pages/Dashboard/Admin/DetailDestination/DetailPageAdmin';
+import { DetailPageAdmin } from './pages/Dashboard/Admin/DetailDestination';
 import { ReservationPage } from './pages/Dashboard/User/Reservation';
 import { AddPage } from './pages/Dashboard/Admin/AddDestination';
 import { EditPage } from './pages/Dashboard/Admin/EditDestination';
@@ -38,8 +38,7 @@ function App() {
   ];
 
   const shouldHideNav = hideNavPaths.some((path) =>
-    location.pathname.startsWith(path),
-  );
+    location.pathname.startsWith(path));
 
   return (
     <div>
@@ -72,6 +71,7 @@ function App() {
               <Route path="/data-user" element={<DataUserPage />} />
               <Route path="/add-destination" element={<AddPage />} />
               <Route path="/edit-destination/:id" element={<EditPage />} />
+              <Route path="/edit-user/:id" element={<EditUserPage />} />
               <Route
                 path="/data-reservation"
                 element={<DataReservationPage />}
