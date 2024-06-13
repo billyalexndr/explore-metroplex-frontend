@@ -8,7 +8,7 @@ function DestUserCard({ id, photo, name, description, rating }) {
   const [isNameExpanded, setIsNameExpanded] = useState(false);
 
   return (
-    <div className="w-1/4 h-[360px] bg-white border border-gray-200 rounded-lg shadow">
+    <div className="w-1/4 h-[360px] bg-white border border-gray-200 rounded-lg shadow flex flex-col">
       <a href="#">
         <img
           className="object-cover w-full h-40 rounded-t-lg"
@@ -16,16 +16,16 @@ function DestUserCard({ id, photo, name, description, rating }) {
           alt={id}
         />
       </a>
-      <div className="flex flex-col justify-between h-40 p-5">
-        <div>
+      <div className="flex flex-col justify-between flex-grow p-5">
+        <div className="flex-grow">
           <Link to={`/detail-destination/${id}`}>
-            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
+            <h5 className="text-xl font-bold tracking-tight text-gray-900">
               {isNameExpanded
                 ? name
-                : `${name.slice(0, 25)}${name.length > 25 ? '...' : ''}`}
+                : `${name.slice(0, 20)}${name.length > 20 ? '...' : ''}`}
             </h5>
           </Link>
-          <p className="mb-3 text-base font-normal text-justify text-gray-700">
+          <p className="text-base h-[100px] font-normal text-justify text-gray-700">
             {isDescriptionExpanded
               ? description
               : `${description.slice(0, 90)}${description.length > 90 ? '...' : ''}`}

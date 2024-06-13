@@ -13,11 +13,14 @@ function AdminPage() {
   const axiosPrivate = useAxiosPrivate();
   const [tours, setTours] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
+  const [selectedCity, setSelectedCity] = useState('');
   const toursPerPage = 4;
   const pagesVisited = pageNumber * toursPerPage;
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
+
+  const citys = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
 
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('query') || '';
@@ -66,7 +69,11 @@ function AdminPage() {
     }
   };
 
-  const displayTours = tours
+  const filteredTours = selectedCity
+    ? tours.filter((tour) => tour.city === selectedCity)
+    : tours;
+
+  const displayTours = filteredTours
     .slice(pagesVisited, pagesVisited + toursPerPage)
     .map((tour) => (
       <DestAdminCard
@@ -80,7 +87,7 @@ function AdminPage() {
       />
     ));
 
-  const pageCount = Math.ceil(tours.length / toursPerPage);
+  const pageCount = Math.ceil(filteredTours.length / toursPerPage);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -102,8 +109,15 @@ function AdminPage() {
             </p>
           </Link>
         </div>
-        <div className="flex items-center justify-center mt-7">
-          <Badge />
+        <div className="flex items-center justify-center mt-7 gap-2">
+          {citys.map((city) => (
+            <Badge
+              key={city}
+              text={city}
+              onClick={() => setSelectedCity(city === selectedCity ? '' : city)}
+              isSelected={city === selectedCity}
+            />
+          ))}
         </div>
         <div className="flex items-center justify-center gap-4 mt-7">
           {displayTours}

@@ -54,7 +54,7 @@ function DetailDestination({
           </div>
         </div>
         <div className="w-1/2 ml-4 bg-white">
-          <div className="mb-5 text-lg text-gray-900 dark:text-white">
+          <div className="mb-5 text-lg text-justify text-gray-900 dark:text-white">
             <p>{description}</p>
           </div>
           <div className="flex mb-5">
@@ -115,8 +115,7 @@ function DetailDestination({
             </svg>
             <iframe
               src={map}
-              width="400"
-              height="250"
+              className="w-full h-[200px]"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"

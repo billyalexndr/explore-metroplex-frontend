@@ -89,12 +89,12 @@ function UserPage() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center mx-10 text-3xl font-bold mt-7">
+      <div className="flex flex-col items-center justify-center mx-10 text-3xl font-bold mt-7 mb-10">
         <h1 className="text-[#006769]">Stories of Explore Metroplex</h1>
         <div className="flex gap-4">
           {tours
             .filter((tour) => tour.feedbacks.length > 0)
-            .slice(0, 4)
+            .slice(0)
             .map((tour) => {
               const feedback = tour.feedbacks[0];
               return (
@@ -108,12 +108,6 @@ function UserPage() {
               );
             })}
         </div>
-        <Link
-          to="/destination"
-          className="text-white mt-4 bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-        >
-          View All
-        </Link>
       </div>
     </div>
   );
