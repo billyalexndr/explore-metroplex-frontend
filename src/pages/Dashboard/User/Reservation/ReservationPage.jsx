@@ -3,11 +3,13 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
 import ReservationList from './components/ReservationList';
+import Loading from '../../../../components/Loading';
 
 function ReservationPage() {
   const axiosPrivate = useAxiosPrivate();
   const { id } = useParams();
   const [reservations, setReservations] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
@@ -26,6 +28,7 @@ function ReservationPage() {
         });
         if (isMounted) {
           setReservations(fetchedReservations);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -33,6 +36,7 @@ function ReservationPage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getReservations();
     }
 
@@ -43,13 +47,20 @@ function ReservationPage() {
     };
   }, []);
 
+  if (loading) {
+    return <Loading />;
+  }
+
   const handleCancelReservation = async (reservationId) => {
     try {
       await api.cancelReservation({ axiosPrivate, id: reservationId });
       setReservations((prevReservations) =>
-        prevReservations.map((reservation) => (
-          reservation.id === reservationId ? { ...reservation, status: 'CANCELED' } : reservation
-      )));
+        prevReservations.map((reservation) =>
+          reservation.id === reservationId
+            ? { ...reservation, status: 'CANCELED' }
+            : reservation,
+        ),
+      );
     } catch (error) {
       alert(error.response.data.message);
     }

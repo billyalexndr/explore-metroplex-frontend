@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
 import CardInputDestination from './components/CardInputDestination';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
+import Loading from '../../../../components/Loading';
 
 function AddPage() {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 10);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const onSubmitHandler = async ({
     name,
@@ -37,6 +47,10 @@ function AddPage() {
     }
     navigate('/admin');
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="bg-white border-gray-200 dark:border-gray-600 dark:bg-gray-900">

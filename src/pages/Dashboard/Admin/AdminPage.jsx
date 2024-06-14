@@ -7,12 +7,14 @@ import SearchBar from '../../../components/Dashboard/SearchBar';
 import DestAdminCard from './components/DestAdminCard';
 import api from '../../../utils/api';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import Loading from '../../../components/Loading';
 
 function AdminPage() {
   const axiosPrivate = useAxiosPrivate();
   const [tours, setTours] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [selectedCity, setSelectedCity] = useState('');
+  const [loading, setLoading] = useState(true);
   const toursPerPage = 4;
   const pagesVisited = pageNumber * toursPerPage;
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ function AdminPage() {
         });
         if (isMounted) {
           setTours(tours);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -43,6 +46,7 @@ function AdminPage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getTours();
     }
 
@@ -92,6 +96,10 @@ function AdminPage() {
     setPageNumber(selected);
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <div className="mx-10">
@@ -108,7 +116,7 @@ function AdminPage() {
             </p>
           </Link>
         </div>
-        <div className="flex items-center justify-center mt-7 gap-2">
+        <div className="flex items-center justify-center gap-2 mt-7">
           {citys.map((city) => (
             <Badge
               key={city}

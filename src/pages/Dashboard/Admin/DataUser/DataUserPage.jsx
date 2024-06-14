@@ -6,6 +6,7 @@ import Pagination from '../../../../components/Dashboard/Pagination';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
 import useAuth from '../../../../hooks/useAuth';
+import Loading from '../../../../components/Loading';
 
 function DataUserPage() {
   const axiosPrivate = useAxiosPrivate();
@@ -14,6 +15,7 @@ function DataUserPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
+  const [loading, setLoading] = useState(true);
 
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('query') || '';
@@ -31,6 +33,7 @@ function DataUserPage() {
         });
         if (isMounted) {
           setUsers(users);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -38,6 +41,7 @@ function DataUserPage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getUsers();
     }
 
@@ -62,6 +66,10 @@ function DataUserPage() {
       }
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>

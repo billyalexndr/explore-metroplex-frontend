@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import PersistLogin from './components/Auth/PersistLogin';
 import RequiredAuth from './components/Auth/RequiredAuth';
@@ -24,10 +24,21 @@ import NavAdmin from './pages/Dashboard/Admin/components/NavAdmin';
 import NavUser from './pages/Dashboard/User/components/NavUser';
 import Footer from './components/Dashboard/Footer';
 import useAuth from './hooks/useAuth';
+import Loading from './components/Loading';
 
 function App() {
   const { auth } = useAuth();
   const location = useLocation();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 10);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const hideNavPaths = [
     '/buy-ticket',
     '/add-destination',
@@ -38,17 +49,22 @@ function App() {
   ];
 
   const shouldHideNav = hideNavPaths.some((path) =>
-    location.pathname.startsWith(path));
+    location.pathname.startsWith(path),
+  );
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       {!shouldHideNav && (
         <>
           {auth?.role === 'ADMIN' && <NavAdmin />}
           {auth?.role === 'USER' && <NavUser />}
         </>
       )}
-      <main className="content">
+      <main className="flex-grow">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/login/admin" element={<LoginAdminPage />} />

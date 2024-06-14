@@ -6,10 +6,12 @@ import SearchBar from '../../../../components/Dashboard/SearchBar';
 import DestUserCard from './components/DestUserCard';
 import Pagination from '../../../../components/Dashboard/Pagination';
 import api from '../../../../utils/api';
+import Loading from '../../../../components/Loading';
 
 function DestinationPage() {
   const [tours, setTours] = useState([]);
   const [city, setCity] = useState('');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
@@ -34,6 +36,7 @@ function DestinationPage() {
         });
         if (isMounted) {
           setTours(tours);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -41,6 +44,7 @@ function DestinationPage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getTours();
     }
 
@@ -73,6 +77,10 @@ function DestinationPage() {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>

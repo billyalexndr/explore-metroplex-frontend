@@ -4,10 +4,12 @@ import { IoIosArrowBack } from 'react-icons/io';
 import CardBuyTicket from './components/CardBuyTicket';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
+import Loading from '../../../../components/Loading';
 
 function BuyTicketPage() {
   const axiosPrivate = useAxiosPrivate();
   const { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const [tour, setTour] = useState();
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,6 +24,7 @@ function BuyTicketPage() {
         const tour = await api.getTourById({ signal: controller.signal, id });
         if (isMounted) {
           setTour(tour);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -29,6 +32,7 @@ function BuyTicketPage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getTour();
     }
 
@@ -39,7 +43,14 @@ function BuyTicketPage() {
     };
   }, []);
 
-  const onSubmitHandler = async ({ name, phone, email, ticket, subtotal, reservedAt }) => {
+  const onSubmitHandler = async ({
+    name,
+    phone,
+    email,
+    ticket,
+    subtotal,
+    reservedAt,
+  }) => {
     try {
       await api.createReservation({
         axiosPrivate,
@@ -57,6 +68,10 @@ function BuyTicketPage() {
       alert(error.response.data.message);
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="bg-white border-gray-200 dark:border-gray-600 dark:bg-gray-900">

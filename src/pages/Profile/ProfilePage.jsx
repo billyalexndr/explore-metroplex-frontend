@@ -112,9 +112,9 @@ function ProfilePage() {
 
   return (
     <div className="w-full">
-      <div className="flex m-9 justify-center items-center">
+      <div className="flex items-center justify-center m-9">
         {profile && (
-          <div className="flex flex-col p-9 w-1/2 bg-white border border-gray-200 rounded-lg shadow">
+          <div className="flex flex-col w-1/2 bg-white border border-gray-200 rounded-lg shadow p-9">
             <div className="flex flex-row justify-between mb-9">
               <button
                 type="button"
@@ -202,15 +202,15 @@ function ProfilePage() {
               {!isEditing && (
                 <div className="flex flex-col space-y-3">
                   <div className="flex">
-                    <p className="font-bold w-24">Username</p>
+                    <p className="w-24 font-bold">Username</p>
                     <p>{profile.username}</p>
                   </div>
                   <div className="flex">
-                    <p className="font-bold w-24">Email</p>
+                    <p className="w-24 font-bold">Email</p>
                     <p>{profile.email}</p>
                   </div>
                   <div className="flex">
-                    <p className="font-bold w-24">Role</p>
+                    <p className="w-24 font-bold">Role</p>
                     <p>{profile.role}</p>
                   </div>
                 </div>
