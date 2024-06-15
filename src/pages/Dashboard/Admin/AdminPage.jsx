@@ -8,6 +8,7 @@ import DestAdminCard from './components/DestAdminCard';
 import api from '../../../utils/api';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import Loading from '../../../components/Loading';
+import ConfirmModal from './components/ConfirmModal';
 
 function AdminPage() {
   const axiosPrivate = useAxiosPrivate();
@@ -15,6 +16,8 @@ function AdminPage() {
   const [pageNumber, setPageNumber] = useState(0);
   const [selectedCity, setSelectedCity] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tourToDelete, setTourToDelete] = useState(null);
   const toursPerPage = 4;
   const pagesVisited = pageNumber * toursPerPage;
   const navigate = useNavigate();
@@ -61,19 +64,29 @@ function AdminPage() {
     setPageNumber(0);
   }, [selectedCity, query]);
 
-  const handleDeleteTour = async ({ id }) => {
-    if (window.confirm('Are you sure you want to delete tour?')) {
+  const handleDeleteTour = async () => {
+    if (tourToDelete) {
       try {
         await api.deleteTour({
           axiosPrivate,
           signal: new AbortController().signal,
-          id,
+          id: tourToDelete.id,
         });
-        setTours((prevTours) => prevTours.filter((tour) => tour.id !== id));
+        setTours((prevTours) =>
+          prevTours.filter((tour) => tour.id !== tourToDelete.id),
+        );
+        setTourToDelete(null);
       } catch (error) {
         alert(error.response.data.message);
+      } finally {
+        setIsModalOpen(false);
       }
     }
+  };
+
+  const confirmDeleteTour = (tour) => {
+    setTourToDelete(tour);
+    setIsModalOpen(true);
   };
 
   const filteredTours = selectedCity
@@ -90,7 +103,7 @@ function AdminPage() {
         name={tour.name}
         description={tour.description}
         rating={tour.rating}
-        onDelete={handleDeleteTour}
+        onDelete={() => confirmDeleteTour(tour)}
       />
     ));
 
@@ -141,6 +154,12 @@ function AdminPage() {
           />
         </div>
       </div>
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleDeleteTour}
+        message="Are you sure you want to delete this tour?"
+      />
     </div>
   );
 }
