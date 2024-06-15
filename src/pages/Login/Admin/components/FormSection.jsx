@@ -33,7 +33,8 @@ function FormSection() {
 
       navigate(from, { replace: true });
     } catch (error) {
-      setErrMsg(error.message || error.response.data.message || 'login failed');
+      const errorMessage = error.response?.data?.message || error.message || 'login failed';
+      setErrMsg(errorMessage);
       await logout();
     }
   };
