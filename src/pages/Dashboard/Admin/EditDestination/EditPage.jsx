@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import CardEditDestination from './components/CardEditDestination';
 import api from '../../../../utils/api';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
+import Loading from '../../../../components/Loading';
 
 function EditPage() {
   const axiosPrivate = useAxiosPrivate();
@@ -12,6 +13,7 @@ function EditPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
@@ -22,6 +24,7 @@ function EditPage() {
         const tour = await api.getTourById({ signal: controller.signal, id });
         if (isMounted) {
           setTour(tour);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -29,6 +32,7 @@ function EditPage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getTour();
     }
 
@@ -68,6 +72,10 @@ function EditPage() {
     }
     navigate('/admin');
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="bg-white border-gray-200 dark:border-gray-600 dark:bg-gray-900">

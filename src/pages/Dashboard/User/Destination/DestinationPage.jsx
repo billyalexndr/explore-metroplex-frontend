@@ -6,18 +6,27 @@ import SearchBar from '../../../../components/Dashboard/SearchBar';
 import DestUserCard from './components/DestUserCard';
 import Pagination from '../../../../components/Dashboard/Pagination';
 import api from '../../../../utils/api';
+import Loading from '../../../../components/Loading';
 
 function DestinationPage() {
   const [tours, setTours] = useState([]);
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState('All City');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
   const [pageNumber, setPageNumber] = useState(0);
-  const toursPerPage = 4;
+  const toursPerPage = 12;
   const pagesVisited = pageNumber * toursPerPage;
 
-  const options = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
+  const options = [
+    'All City',
+    'Jakarta',
+    'Bogor',
+    'Depok',
+    'Tangerang',
+    'Bekasi',
+  ];
 
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('query') || '';
@@ -34,6 +43,7 @@ function DestinationPage() {
         });
         if (isMounted) {
           setTours(tours);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -41,6 +51,7 @@ function DestinationPage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getTours();
     }
 
@@ -51,9 +62,14 @@ function DestinationPage() {
     };
   }, [location.search, navigate, location]);
 
-  const filteredTours = city
-    ? tours.filter((tour) => tour.city === city)
-    : tours;
+  useEffect(() => {
+    setPageNumber(0);
+  }, [city, query]);
+
+  const filteredTours =
+    city && city !== 'All City'
+      ? tours.filter((tour) => tour.city === city)
+      : tours;
 
   const displayTours = filteredTours
     .slice(pagesVisited, pagesVisited + toursPerPage)
@@ -73,6 +89,10 @@ function DestinationPage() {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -94,11 +114,13 @@ function DestinationPage() {
             Where Do You Want to Explore?
           </h1>
         </div>
-        <div className="flex items-center justify-center gap-4 mt-7">
-          {displayTours}
-        </div>
+        <div className="grid grid-cols-4 gap-4 mt-7"> {displayTours}</div>
         <div className="flex items-center justify-center w-full mt-7">
-          <Pagination pageCount={pageCount} changePage={changePage} />
+          <Pagination
+            pageCount={pageCount}
+            changePage={changePage}
+            forcePage={pageNumber}
+          />
         </div>
       </div>
     </div>

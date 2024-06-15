@@ -1,25 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
 import useInput from '../../../../hooks/useInput';
+import Loading from '../../../../components/Loading';
 
 function EditUserPage() {
   const { id } = useParams();
   const { state } = useLocation();
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+  const [loading, setLoading] = useState(true);
 
   const [name, handleNameChange] = useInput(state?.user.name || '');
   const [username, handleUsernameChange] = useInput(state?.user.username || '');
   const [email, handleEmailChange] = useInput(state?.user.email || '');
   const [role, handleRoleChange] = useInput(state?.user.role || 'USER');
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 10);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await api.updateUser({ axiosPrivate, signal: null, id, name, username, email, role });
+      await api.updateUser({
+        axiosPrivate,
+        signal: null,
+        id,
+        name,
+        username,
+        email,
+        role,
+      });
       navigate('/data-user');
     } catch (error) {
       alert(error.response.data.message);
@@ -30,15 +48,18 @@ function EditUserPage() {
     navigate('/data-user');
   };
 
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
-    <div className="m-9 flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center m-9">
       <h1 className="mb-5 text-center text-xl font-bold text-[#006769]">
         EDIT USER
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="p-9 w-3/4 bg-white border border-gray-200 rounded-lg shadow"
+        className="w-3/4 bg-white border border-gray-200 rounded-lg shadow p-9"
       >
         <div className="grid gap-6 mb-6 md:grid-cols-2">
           <div className="relative">
@@ -111,18 +132,21 @@ function EditUserPage() {
             </label>
           </div>
         </div>
-        <div className="flex items-center p-5 justify-center">
-          <div className="flex flex-row w-1/2 gap-6 justify-around">
+        <div className="flex items-center justify-center p-5">
+          <div className="flex flex-row justify-around w-1/2 gap-6">
             <button
               type="submit"
               onClick={handleCancel}
               className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
-            > Cancel
+            >
+              {' '}
+              Cancel
             </button>
             <button
               type="submit"
               className="text-white bg-[#006769] hover:bg-[#053a3b] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
-            >Save
+            >
+              Save
             </button>
           </div>
         </div>

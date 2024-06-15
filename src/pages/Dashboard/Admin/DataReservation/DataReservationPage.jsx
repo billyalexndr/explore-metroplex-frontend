@@ -5,10 +5,12 @@ import SearchBar from '../../../../components/Dashboard/SearchBar';
 import Pagination from '../../../../components/Dashboard/Pagination';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
+import Loading from '../../../../components/Loading';
 
 function DataUserPage() {
   const axiosPrivate = useAxiosPrivate();
   const [reservations, setReservations] = useState();
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
@@ -29,6 +31,7 @@ function DataUserPage() {
         });
         if (isMounted) {
           setReservations(reservations);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -36,6 +39,7 @@ function DataUserPage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getReservations();
     }
 
@@ -45,6 +49,10 @@ function DataUserPage() {
       effectRun.current = true;
     };
   }, [location.search, navigate, location]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>

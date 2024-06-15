@@ -5,10 +5,12 @@ import FeedbackInput from './components/FeedbackInput';
 import FeedbackList from './components/FeedbackList';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
+import Loading from '../../../../components/Loading';
 
 function DetailPageUser() {
   const axiosPrivate = useAxiosPrivate();
   const { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const [tour, setTour] = useState();
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,6 +25,7 @@ function DetailPageUser() {
         const tour = await api.getTourById({ signal: controller.signal, id });
         if (isMounted) {
           setTour(tour);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -30,6 +33,7 @@ function DetailPageUser() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getDetailTour();
     }
 
@@ -58,6 +62,10 @@ function DetailPageUser() {
       alert(error.response.data.message);
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="w-full">

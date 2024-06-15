@@ -3,9 +3,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import DestUserCard from './Destination/components/DestUserCard';
 import StoryCard from './components/StoryCard';
 import api from '../../../utils/api';
+import Loading from '../../../components/Loading';
 
 function UserPage() {
   const [tours, setTours] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
@@ -23,6 +25,7 @@ function UserPage() {
         });
         if (isMounted) {
           setTours(tours);
+          setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -30,6 +33,7 @@ function UserPage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getTours();
     }
 
@@ -39,6 +43,10 @@ function UserPage() {
       effectRun.current = true;
     };
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -89,7 +97,7 @@ function UserPage() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center mx-10 text-3xl font-bold mt-7 mb-10">
+      <div className="flex flex-col items-center justify-center mx-10 mb-10 text-3xl font-bold mt-7">
         <h1 className="text-[#006769]">Stories of Explore Metroplex</h1>
         <div className="flex gap-4">
           {tours
