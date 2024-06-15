@@ -26,7 +26,7 @@ function FormSection() {
 
       navigate('/login');
     } catch (error) {
-      setErrMsg(error.response.data.message || 'registration failed');
+      setErrMsg(error.response?.data?.message || 'registration failed');
     }
   };
 

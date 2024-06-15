@@ -42,7 +42,7 @@ function PasswordUpdatePage() {
             </h2>
             <div className="relative">
               <input
-                type="text"
+                type="password"
                 id="currentPassword"
                 name="currentPassword"
                 value={currentPassword}
@@ -51,7 +51,7 @@ function PasswordUpdatePage() {
                 placeholder=" "
               />
               <label
-                htmlfor="currentPassword"
+                htmlFor="currentPassword"
                 className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#006769] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
               >
                 Current Password
@@ -59,7 +59,7 @@ function PasswordUpdatePage() {
             </div>
             <div className="relative">
               <input
-                type="text"
+                type="password"
                 id="newPassword"
                 name="newPassword"
                 value={newPassword}
@@ -68,7 +68,7 @@ function PasswordUpdatePage() {
                 placeholder=" "
               />
               <label
-                htmlfor="newPassword"
+                htmlFor="newPassword"
                 className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#006769] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
               >
                 New Password
