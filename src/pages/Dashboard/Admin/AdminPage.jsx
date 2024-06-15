@@ -18,7 +18,7 @@ function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tourToDelete, setTourToDelete] = useState(null);
-  const toursPerPage = 4;
+  const toursPerPage = 12;
   const pagesVisited = pageNumber * toursPerPage;
   const navigate = useNavigate();
   const location = useLocation();
@@ -143,9 +143,7 @@ function AdminPage() {
             />
           ))}
         </div>
-        <div className="flex items-center justify-center gap-4 mt-7">
-          {displayTours}
-        </div>
+        <div className="grid grid-cols-4 gap-4 mt-7"> {displayTours}</div>
         <div className="flex items-center justify-center w-full mt-7">
           <Pagination
             pageCount={pageCount}

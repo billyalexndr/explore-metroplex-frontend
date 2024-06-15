@@ -16,7 +16,7 @@ function DestinationPage() {
   const location = useLocation();
   const effectRun = useRef(false);
   const [pageNumber, setPageNumber] = useState(0);
-  const toursPerPage = 4;
+  const toursPerPage = 12;
   const pagesVisited = pageNumber * toursPerPage;
 
   const options = [
@@ -114,9 +114,7 @@ function DestinationPage() {
             Where Do You Want to Explore?
           </h1>
         </div>
-        <div className="flex items-center justify-center gap-4 mt-7">
-          {displayTours}
-        </div>
+        <div className="grid grid-cols-4 gap-4 mt-7"> {displayTours}</div>
         <div className="flex items-center justify-center w-full mt-7">
           <Pagination
             pageCount={pageCount}

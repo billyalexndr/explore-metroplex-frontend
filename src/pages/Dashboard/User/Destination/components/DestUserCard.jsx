@@ -8,7 +8,7 @@ function DestUserCard({ id, photo, name, description, rating }) {
   const [isNameExpanded, setIsNameExpanded] = useState(false);
 
   return (
-    <div className="w-1/4 h-[360px] bg-white border border-gray-200 rounded-lg shadow flex flex-col">
+    <div className="w-full h-[360px] bg-white border border-gray-200 rounded-lg shadow flex flex-col">
       <a href="#">
         <img
           className="object-cover w-full h-40 rounded-t-lg"
