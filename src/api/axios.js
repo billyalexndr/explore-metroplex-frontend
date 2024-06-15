@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://explore-metroplex-backend.vercel.app';
+const API_BASE_URL = 'https://explore-metroplex-backend.onrender.com';
 
 export default axios.create({
   baseURL: API_BASE_URL,

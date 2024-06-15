@@ -57,6 +57,10 @@ function AdminPage() {
     };
   }, [location.search, navigate, location]);
 
+  useEffect(() => {
+    setPageNumber(0);
+  }, [selectedCity, query]);
+
   const handleDeleteTour = async ({ id }) => {
     if (window.confirm('Are you sure you want to delete tour?')) {
       try {
@@ -130,7 +134,11 @@ function AdminPage() {
           {displayTours}
         </div>
         <div className="flex items-center justify-center w-full mt-7">
-          <Pagination pageCount={pageCount} changePage={changePage} />
+          <Pagination
+            pageCount={pageCount}
+            changePage={changePage}
+            forcePage={pageNumber}
+          />
         </div>
       </div>
     </div>

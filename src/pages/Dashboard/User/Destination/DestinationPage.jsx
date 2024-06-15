@@ -10,7 +10,7 @@ import Loading from '../../../../components/Loading';
 
 function DestinationPage() {
   const [tours, setTours] = useState([]);
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState('All City');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,7 +19,14 @@ function DestinationPage() {
   const toursPerPage = 4;
   const pagesVisited = pageNumber * toursPerPage;
 
-  const options = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
+  const options = [
+    'All City',
+    'Jakarta',
+    'Bogor',
+    'Depok',
+    'Tangerang',
+    'Bekasi',
+  ];
 
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('query') || '';
@@ -55,9 +62,14 @@ function DestinationPage() {
     };
   }, [location.search, navigate, location]);
 
-  const filteredTours = city
-    ? tours.filter((tour) => tour.city === city)
-    : tours;
+  useEffect(() => {
+    setPageNumber(0);
+  }, [city, query]);
+
+  const filteredTours =
+    city && city !== 'All City'
+      ? tours.filter((tour) => tour.city === city)
+      : tours;
 
   const displayTours = filteredTours
     .slice(pagesVisited, pagesVisited + toursPerPage)
@@ -106,7 +118,11 @@ function DestinationPage() {
           {displayTours}
         </div>
         <div className="flex items-center justify-center w-full mt-7">
-          <Pagination pageCount={pageCount} changePage={changePage} />
+          <Pagination
+            pageCount={pageCount}
+            changePage={changePage}
+            forcePage={pageNumber}
+          />
         </div>
       </div>
     </div>
