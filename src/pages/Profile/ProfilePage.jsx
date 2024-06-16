@@ -4,11 +4,13 @@ import api from '../../utils/api';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import useLogOut from '../../hooks/useLogOut';
 import ConfirmModal from '../Dashboard/Admin/components/ConfirmModal';
+import Loading from '../../components/Loading';
 
 function ProfilePage() {
   const axiosPrivate = useAxiosPrivate();
   const [profile, setProfile] = useState();
   const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -44,6 +46,7 @@ function ProfilePage() {
             username: profile.username,
             email: profile.email,
           });
+          setLoading(false);
         }
       } catch (error) {
         setErrMsg(error.response.data.message);
@@ -52,6 +55,7 @@ function ProfilePage() {
     };
 
     if (effectRun.current) {
+      setLoading(true);
       getOwnProfile();
     }
 
@@ -114,6 +118,10 @@ function ProfilePage() {
   const confirmDeleteUser = () => {
     setIsModalOpen(true);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="w-full">
