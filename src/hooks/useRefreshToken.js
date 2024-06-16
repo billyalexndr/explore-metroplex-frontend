@@ -7,8 +7,9 @@ const useRefreshToken = () => {
 
   const refresh = async () => {
     const accessToken = await api.refreshToken();
-    const { id, name, username, email, role } = jwtDecode(accessToken);
-    setAuth(() => ({ user: { id, name, username, email }, role, accessToken }));
+    setAuth((prev) => {
+      return { ...prev, accessToken };
+    });
     return accessToken;
   };
   return refresh;
