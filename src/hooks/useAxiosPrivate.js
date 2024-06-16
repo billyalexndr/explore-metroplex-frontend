@@ -12,7 +12,7 @@ const useAxiosPrivate = () => {
       (config) => {
         const newConfig = { ...config };
         if (!newConfig.headers.Authorization) {
-          newConfig.headers.Authorization = Bearer ${ auth?.accessToken };
+          newConfig.headers.Authorization = `Bearer ${auth?.accessToken}`;
         }
         return newConfig;
       },
