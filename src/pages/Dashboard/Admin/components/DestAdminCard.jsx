@@ -9,13 +9,13 @@ function DestAdminCard({ id, photo, name, description, rating, onDelete }) {
 
   return (
     <div className="w-full h-[360px] bg-white border border-gray-200 rounded-lg shadow flex flex-col">
-      <a href="#">
+      <Link to={`/detail-destination-admin/${id}`}>
         <img
           className="object-cover w-full h-40 rounded-t-lg"
           src={photo}
           alt={id}
         />
-      </a>
+      </Link>
       <div className="flex flex-col justify-between flex-grow p-5">
         <div className="flex-grow overflow-hidden">
           <Link to={`/detail-destination-admin/${id}`}>

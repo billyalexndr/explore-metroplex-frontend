@@ -28,6 +28,14 @@
     "react/jsx-one-expression-per-line": "off",
     "object-curly-newline": "off",
     "react/no-danger": "off",
-    "react/jsx-curly-newline": "off"
+    "react/jsx-curly-newline": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "no-unused-vars": "off",
+    "function-paren-newline": "off",
+    "no-confusing-arrow": "off",
+    "arrow-body-style": "off",
+    "react/no-unescaped-entities": "off",
+    "jsx-a11y/anchor-is-valid": "off"
   }
 }

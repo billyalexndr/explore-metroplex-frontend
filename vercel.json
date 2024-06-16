@@ -1,0 +1,21 @@
+{
+  "rewrites": [
+    { "source": "/login", "destination": "/" },
+    { "source": "/login/admin", "destination": "/" },
+    { "source": "/register", "destination": "/" },
+    { "source": "/destination", "destination": "/" },
+    { "source": "/detail-destination/:id", "destination": "/" },
+    { "source": "/buy-ticket/:id", "destination": "/" },
+    { "source": "/reservation", "destination": "/" },
+    { "source": "/admin", "destination": "/" },
+    { "source": "/data-user", "destination": "/" },
+    { "source": "/add-destination", "destination": "/" },
+    { "source": "/edit-destination/:id", "destination": "/" },
+    { "source": "/edit-user/:id", "destination": "/" },
+    { "source": "/data-reservation", "destination": "/" },
+    { "source": "/detail-destination-admin/:id", "destination": "/" },
+    { "source": "/profile", "destination": "/" },
+    { "source": "/profile/update-password", "destination": "/" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
