@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function StoryCard({ title, profilePicture, name, description }) {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-  const [isTitleExpanded, setIsTitileExpanded] = useState(false);
+  const [isTitleExpanded, setIsTitleExpanded] = useState(false);
 
   return (
     <div

@@ -77,7 +77,7 @@ function PasswordUpdatePage() {
             <div className="flex justify-center space-x-3">
               <button
                 type="button"
-                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
                 onClick={() =>
                   navigate('/profile', { state: { from: location } })
                 }
