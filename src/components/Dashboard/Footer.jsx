@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <footer className="bg-[/9DB0B7] mt-7">
+    <footer className="bg-[#9DB0B7] mt-7">
       <div className="w-full max-w-screen-xl p-4 py-6 mx-auto lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="max-w-xs mb-6 md:mb-0">
-            <Link to="/" className="flex items-center mb-4">
+            <Link to="#" className="flex items-center mb-4">
               <span className="self-center text-2xl italic font-semibold text-white whitespace-nowrap">
                 Explore Metroplex
               </span>
@@ -20,17 +20,17 @@ function Footer() {
             <div>
               <ul className="font-medium text-white dark:text-white">
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">
+                  <Link to="#" className="hover:underline">
                     Destinations
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">
+                  <Link to="#" className="hover:underline">
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" className="hover:underline">
+                  <Link to="#" className="hover:underline">
                     Stories
                   </Link>
                 </li>
@@ -39,17 +39,17 @@ function Footer() {
             <div>
               <ul className="font-medium text-white dark:text-white">
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline ">
+                  <Link to="#" className="hover:underline ">
                     Terms &amp; Conditions
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline ">
+                  <Link to="#" className="hover:underline ">
                     Terms Of Use
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" className="hover:underline">
+                  <Link to="#" className="hover:underline">
                     Privacy Policy
                   </Link>
                 </li>
@@ -74,7 +74,7 @@ function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <Link to="/" className="hover:underline">
+                  <Link to="#" className="hover:underline">
                     @explore_metroplex
                   </Link>
                 </li>
@@ -95,7 +95,7 @@ function Footer() {
                       d="m3.5 5.5 7.893 6.036a1 1 0 0 0 1.214 0L20.5 5.5M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"
                     />
                   </svg>
-                  <Link to="/" className="hover:underline">
+                  <Link to="#" className="hover:underline">
                     exploremetroplex@gmail.com
                   </Link>
                 </li>
@@ -117,7 +117,7 @@ function Footer() {
                       d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z"
                     />
                   </svg>
-                  <Link to="/" className="hover:underline">
+                  <Link to="#" className="hover:underline">
                     021-3425-123
                   </Link>
                 </li>
