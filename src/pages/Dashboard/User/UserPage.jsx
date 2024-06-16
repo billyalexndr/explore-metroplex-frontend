@@ -3,11 +3,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import DestUserCard from './Destination/components/DestUserCard';
 import StoryCard from './components/StoryCard';
 import api from '../../../utils/api';
-import Loading from '../../../components/Loading';
+// import Loading from '../../../components/Loading';
 
 function UserPage() {
   const [tours, setTours] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const effectRun = useRef(false);
@@ -25,7 +25,7 @@ function UserPage() {
         });
         if (isMounted) {
           setTours(tours);
-          setLoading(false);
+          // setLoading(false);
         }
       } catch (error) {
         navigate('/login', { state: { from: location }, replace: true });
@@ -33,7 +33,7 @@ function UserPage() {
     };
 
     if (effectRun.current) {
-      setLoading(true);
+      // setLoading(true);
       getTours();
     }
 
@@ -44,9 +44,9 @@ function UserPage() {
     };
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   return (
     <div>
