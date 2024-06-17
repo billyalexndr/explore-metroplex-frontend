@@ -29,13 +29,13 @@ Platform ini menyediakan daftar tempat wisata di JABODETABEK dengan informasi de
 1. Clone proyek
 
 ```bash
-  git clone https://github.com/billyalexndr/explore-metroplex-frontend.git
+  git clone --single-branch --branch local-run https://github.com/billyalexndr/explore-metroplex-frontend.git
 ```
 
-2. Pindah ke branch `local-run` dengan command
+2. Pindah ke folder/directory hasil dari cloning
 
 ```bash
-  git switch local-run
+  cd explore-metroplex-frontend
 ```
 
 3. Instal library menggunakan npm
