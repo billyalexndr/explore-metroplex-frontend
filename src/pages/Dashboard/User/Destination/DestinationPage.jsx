@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -14,7 +14,6 @@ function DestinationPage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
   const [pageNumber, setPageNumber] = useState(0);
   const toursPerPage = 12;
   const pagesVisited = pageNumber * toursPerPage;
@@ -50,15 +49,12 @@ function DestinationPage() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getTours();
-    }
+    setLoading(true);
+    getTours();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, [location.search, navigate, location]);
 

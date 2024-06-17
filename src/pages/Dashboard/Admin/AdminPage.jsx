@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoAdd } from 'react-icons/io5';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Badge from '../../../components/Dashboard/Badge';
@@ -22,7 +22,6 @@ function AdminPage() {
   const pagesVisited = pageNumber * toursPerPage;
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
 
   const citys = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
 
@@ -48,15 +47,12 @@ function AdminPage() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getTours();
-    }
+    setLoading(true);
+    getTours();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, [location.search, navigate, location]);
 

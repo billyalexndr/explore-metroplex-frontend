@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import api from '../../../../utils/api';
@@ -12,7 +12,6 @@ function ReservationPage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
   const [activeTab, setActiveTab] = useState('BOOKED');
 
   useEffect(() => {
@@ -35,15 +34,12 @@ function ReservationPage() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getReservations();
-    }
+    setLoading(true);
+    getReservations();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, []);
 

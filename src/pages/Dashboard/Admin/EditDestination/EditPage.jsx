@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import CardEditDestination from './components/CardEditDestination';
@@ -12,7 +12,6 @@ function EditPage() {
   const [tour, setTour] = useState();
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,15 +30,12 @@ function EditPage() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getTour();
-    }
+    setLoading(true);
+    getTour();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, []);
 

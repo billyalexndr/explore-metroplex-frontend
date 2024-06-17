@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import useLogOut from '../../../../hooks/useLogOut';
@@ -9,7 +9,6 @@ function NavAdmin() {
   const [profile, setProfile] = useState();
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
   const logout = useLogOut();
 
   const signOut = async () => {
@@ -31,14 +30,11 @@ function NavAdmin() {
       }
     };
 
-    if (effectRun.current) {
-      getOwnProfile();
-    }
+    getOwnProfile();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, []);
 

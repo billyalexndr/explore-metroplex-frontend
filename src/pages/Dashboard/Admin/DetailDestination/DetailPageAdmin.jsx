@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import DetailDestination from './components/DetailDestination';
 import FeedbackList from './components/FeedbackList';
@@ -10,7 +10,6 @@ function DetailPageAdmin() {
   const [tour, setTour] = useState();
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,15 +28,12 @@ function DetailPageAdmin() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getDetailTour();
-    }
+    setLoading(true);
+    getDetailTour();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, []);
 
