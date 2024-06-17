@@ -25,7 +25,44 @@ Platform ini menyediakan daftar tempat wisata di JABODETABEK dengan informasi de
 <a href="https://tailwindcss.com/" target="_blank"><img src="https://flowbite.s3.amazonaws.com/github/logo-github.png" width="350" height="150" alt="Logo TailwindCSS"></a>
 
 ## Instalasi / Cara menjalankan di lokal
+> Terdapat 2 (dua) cara untuk menjalankan di lokal, yaitu dengan Build dan tanpa tahap Build.
 
+
+### Instalasi / Cara menjalankan di lokal dengan Build
+1. Clone proyek
+```bash
+  git clone https://github.com/billyalexndr/explore-metroplex-frontend.git
+```
+
+2. Pindah ke folder/directory hasil dari cloning
+
+```bash
+  cd explore-metroplex-frontend
+```
+
+3. Instal library menggunakan npm
+```bash
+  npm install
+```
+
+4. Copy + Paste .env.example lalu rename menjadi .env
+5. Isikan value dari `VITE_API_BASE_URL` pada file .env dengan
+```bash
+  https://explore-metroplex-backend.onrender.com
+```
+
+6. Build project 
+```bash
+  npm run build
+```
+
+7. Jalankan hasil build
+
+```bash
+  npm run preview
+```
+
+### Instalasi /  Cara menjalankan di lokal tanpa Build
 1. Clone proyek
 
 ```bash
