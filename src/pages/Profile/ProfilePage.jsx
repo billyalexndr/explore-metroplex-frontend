@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
@@ -21,7 +21,6 @@ function ProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
   const logout = useLogOut();
 
   useEffect(() => {
@@ -54,15 +53,12 @@ function ProfilePage() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getOwnProfile();
-    }
+    setLoading(true);
+    getOwnProfile();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, []);
 

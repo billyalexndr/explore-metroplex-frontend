@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { IoIosArrowBack } from 'react-icons/io';
 import CardBuyTicket from './components/CardBuyTicket';
@@ -13,7 +13,6 @@ function BuyTicketPage() {
   const [tour, setTour] = useState();
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -31,15 +30,12 @@ function BuyTicketPage() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getTour();
-    }
+    setLoading(true);
+    getTour();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, []);
 

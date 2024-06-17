@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TableReservation from '../components/TableReservation';
 import SearchBar from '../../../../components/Dashboard/SearchBar';
@@ -13,7 +13,6 @@ function DataUserPage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
 
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('query') || '';
@@ -38,15 +37,12 @@ function DataUserPage() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getReservations();
-    }
+    setLoading(true);
+    getReservations();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, [location.search, navigate, location]);
 

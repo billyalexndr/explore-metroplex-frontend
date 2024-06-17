@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import DestUserCard from './Destination/components/DestUserCard';
 import StoryCard from './components/StoryCard';
@@ -10,7 +10,6 @@ function UserPage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -32,15 +31,12 @@ function UserPage() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getTours();
-    }
+    setLoading(true);
+    getTours();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, []);
 

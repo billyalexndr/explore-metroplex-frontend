@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import DetailDestination from './components/DetailDestination';
 import FeedbackInput from './components/FeedbackInput';
@@ -14,7 +14,6 @@ function DetailPageUser() {
   const [tour, setTour] = useState();
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -32,15 +31,12 @@ function DetailPageUser() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getDetailTour();
-    }
+    setLoading(true);
+    getDetailTour();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, []);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TableUser from '../components/TableUser';
 import SearchBar from '../../../../components/Dashboard/SearchBar';
@@ -19,7 +19,6 @@ function DataUserPage() {
   const [userToDelete, setUserToDelete] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const effectRun = useRef(false);
 
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('query') || '';
@@ -44,15 +43,12 @@ function DataUserPage() {
       }
     };
 
-    if (effectRun.current) {
-      setLoading(true);
-      getUsers();
-    }
+    setLoading(true);
+    getUsers();
 
     return () => {
       isMounted = false;
       controller.abort();
-      effectRun.current = true;
     };
   }, [location.search, navigate, location]);
 
