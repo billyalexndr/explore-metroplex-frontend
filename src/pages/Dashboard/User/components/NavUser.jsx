@@ -22,7 +22,10 @@ function NavUser() {
 
     const getOwnProfile = async () => {
       try {
-        const profile = await api.getOwnProfile({ axiosPrivate, signal: controller.signal });
+        const profile = await api.getOwnProfile({
+          axiosPrivate,
+          signal: controller.signal,
+        });
         if (isMounted) {
           setProfile(profile);
         }
