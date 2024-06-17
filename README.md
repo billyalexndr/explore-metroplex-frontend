@@ -22,7 +22,7 @@ Platform ini menyediakan daftar tempat wisata di JABODETABEK dengan informasi de
 <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png" width="150" alt="Logo Javascript"></span>
 <a href="https://react.dev/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png?20220125121207" width="150" alt="Logo React JS"></a>
 <a href="https://vitejs.dev/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Vitejs-logo.svg/256px-Vitejs-logo.svg.png?20220412224743" width="150" alt="Logo Vite"></a>
-<a href="https://tailwindcss.com/" target="_blank"><img src="https://flowbite.s3.amazonaws.com/github/logo-github.png" width="500" height="200" alt="Logo TailwindCSS"></a>
+<a href="https://tailwindcss.com/" target="_blank"><img src="https://flowbite.s3.amazonaws.com/github/logo-github.png" width="350" height="150" alt="Logo TailwindCSS"></a>
 
 ## Instalasi / Cara menjalankan di lokal
 
