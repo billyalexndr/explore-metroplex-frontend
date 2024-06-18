@@ -12,10 +12,10 @@ Platform ini menyediakan daftar tempat wisata di JABODETABEK dengan informasi de
 
 - [Project Brief](https://docs.google.com/document/d/1INBbBdEX_H5ubBFeSVfj7LvPk6kqsM_nBKy3wgbMXcI/edit?usp=sharing)
 - [Working Doc](https://docs.google.com/document/d/1K08pxiTfdBk2G4Ngr_JLCJc8aipQntynKISEmy79QHk/edit?usp=sharing)
-- [User Guide]()
-- [Slide Presentasi](https://docs.google.com/presentation/d/1GPpS7vy6RvJXQSDL7uMM9xaSdziKVR9A/edit?usp=sharing&ouid=101825553434143937092&rtpof=true&sd=true)
-- [Video Presentasi]()
-- [Video Demo Aplikasi]()
+- [User Guide](https://drive.google.com/file/d/1hxmES5QSzpJIGh_uRibzGCAune1PapHd/view?usp=sharing)
+- [Slide Presentasi](https://drive.google.com/file/d/179g3UlS8NHtv_xqvqzpq78JugKL8uebA/view?usp=sharing)
+- [Video Presentasi](https://youtu.be/IfywqlQG86c)
+- [Video Demo Aplikasi](https://youtu.be/C77Dk24VQ_4)
 
 ## Resources
 
